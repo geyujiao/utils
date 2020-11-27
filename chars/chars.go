@@ -1,11 +1,13 @@
-package main
+package chars
 
 import (
 	"fmt"
 	"github.com/vgmdj/utils/logger"
 	"math"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 //ToInt 转换成int格式
@@ -157,4 +159,17 @@ func FloatRetain(f float64) float64  {
 	value, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", f), 64)
 
 	return value
+}
+
+
+// 生成随机字符串
+func GetRandomString(l int) string {
+	str := "0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+	bytes := []byte(str)
+	result := []byte{}
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < l; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
+	}
+	return string(result)
 }

@@ -1,4 +1,4 @@
-package main
+package chars
 
 import (
 	"fmt"
@@ -66,7 +66,7 @@ func TestToString(t *testing.T) {
 	str := strconv.Itoa(10)
 	logger.Info("int to string", str)
 
-	logger.Info("int to string", fmt.Sprintf("%v----%d", 10, 10))
+	logger.Info("int to string", fmt.Sprintf("%v----%d", 10, 10)) //%v 和 %d 都可以
 
 	// float to string
 	logger.Info("float to string", fmt.Sprintf("%.2f", 0.12))
@@ -75,14 +75,14 @@ func TestToString(t *testing.T) {
 
 func TestToString2(t *testing.T) {
 	now := time.Now()
-	logger.Info("time now", now)  // cst 中国沿海时间(北京时间)
+	logger.Info("time now", now) // cst 中国沿海时间(北京时间)
 	strTime := "2020-11-26 11:26:00"
 
 	// string to time
 	timeT, _ := time.ParseInLocation("2006-01-02 15:04:05", strTime, time.Local) // cst 中国沿海时间(北京时间)
-    logger.Info("string to time", timeT)
+	logger.Info("string to time", timeT)
 
-	timeT2, _ := time.Parse("2006-01-02 15:04:05", strTime)  // utc 世界协调时间(不要用这个，容易出错)
+	timeT2, _ := time.Parse("2006-01-02 15:04:05", strTime) // utc 世界协调时间(不要用这个，容易出错)
 	logger.Info("string to time", timeT2)
 
 	// time to string
