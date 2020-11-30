@@ -6,9 +6,9 @@ import (
 )
 
 func TestEmailClient_SendMessage(t *testing.T) {
-	username := "750313228@qq.com"
-	host := "smtp.qq.com"
-	password := "zibjzgvjkpqqbfhe"
+	username := ""
+	host := ""
+	password := ""
 	port := 465
 
 	subject := "邀请"
