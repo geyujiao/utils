@@ -9,6 +9,7 @@ require (
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/tealeg/xlsx v1.0.5
 	github.com/tuotoo/qrcode v0.0.0-20190222102259-ac9c44189bf2
