@@ -1,0 +1,1 @@
+migu/triallightlive.miguvideo.com/SNS/nginx/triallightlive.miguvideo.com.conf
