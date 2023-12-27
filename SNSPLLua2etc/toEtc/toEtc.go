@@ -6,6 +6,8 @@ import (
 	"io"
 	"os"
 	"strings"
+
+	"github.com/tealeg/xlsx"
 )
 
 /*
@@ -24,11 +26,11 @@ import (
 	   4.写表格
 */
 
-func OriginalToEtc(fileName string) (domainMapList1, domainMapList2 map[string][]string) {
-	originalList := ReadOriginalData(fileName)
-	domainMapList1, domainMapList2 = GetDomainMap(originalList)
-
-	return
+func OriginalToEtc(oriFileName, targFileName string) {
+	originalList := ReadOriginalData(oriFileName)
+	domainMapList1, domainMapList2 := GetDomainMap(originalList)
+	domainMapTmp1, domainMapTmp2 := GetDomainMapTmp(originalList)
+	WriteExcelEtc(targFileName, domainMapTmp1, domainMapTmp2, domainMapList1, domainMapList2)
 }
 
 // 1. 按行读文件，得到list
@@ -66,16 +68,16 @@ func ReadOriginalData(fileName string) (originalList []string) {
 	return
 }
 
-// 2. list ----> map ，key=域名
+// 2. list ----> map ，key=域名---下发路径/etc/nginx/sites-enabled/xx.conf
 func GetDomainMap(originalList []string) (domainMapList1, domainMapList2 map[string][]string) {
 	domainMapList1 = make(map[string][]string, 0)
 	for _, original := range originalList {
-		if strings.Contains(original, "SNS") {
-			domain := strings.Split(original, "/")[1]
+		if strings.Contains(original, "SNS") { // migu/v6-sc.miguvideo.com/SNS/nginx/v6-sc.miguvideo.com.conf
+			domain := strings.Split(original, "/")[1] // = v6-sc.miguvideo.com
 			if _, exist := domainMapList1[domain]; !exist {
 				domainMapList1[domain] = make([]string, 0)
 			}
-			info := strings.Split(original, "SNS")[1]
+			info := strings.Split(original, "SNS")[1] //  = /nginx/v6-sc.miguvideo.com.conf
 			info = ToEtc(domain, info)
 			domainMapList1[domain] = append(domainMapList1[domain], info)
 		}
@@ -96,15 +98,119 @@ func GetDomainMap(originalList []string) (domainMapList1, domainMapList2 map[str
 	return
 }
 
+// 2. list ----> map ，key=域名----原始路径/SNS/nginx/xxx.conf
+func GetDomainMapTmp(originalList []string) (domainMapTmp1, domainMapTmp2 map[string][]string) {
+	domainMapTmp1 = make(map[string][]string, 0)
+	for _, original := range originalList {
+		if strings.Contains(original, "SNS") { // migu/v6-sc.miguvideo.com/SNS/nginx/v6-sc.miguvideo.com.conf
+			domain := strings.Split(original, "/")[1] // = v6-sc.miguvideo.com
+			if _, exist := domainMapTmp1[domain]; !exist {
+				domainMapTmp1[domain] = make([]string, 0)
+			}
+			info := "/SNS" + strings.Split(original, "SNS")[1] //  = /SNS/nginx/v6-sc.miguvideo.com.conf
+			domainMapTmp1[domain] = append(domainMapTmp1[domain], info)
+		}
+	}
+	domainMapTmp2 = make(map[string][]string, 0)
+	for _, original := range originalList {
+		if strings.Contains(original, "CCS") {
+			domain := strings.Split(original, "/")[1]
+			if _, exist := domainMapTmp2[domain]; !exist {
+				domainMapTmp2[domain] = make([]string, 0)
+			}
+			info := "/CCS" + strings.Split(original, "CCS")[1]
+			domainMapTmp2[domain] = append(domainMapTmp2[domain], info)
+		}
+	}
+
+	return
+}
+
 // 3. 替换
-func ToEtc(domain, oriStr string) (newStr string) {
+func ToEtc(domain, oriStr string) (newStr string) { //  /nginx/v6-sc.miguvideo.com.conf
 	///ats/remap.config
 	newStr = strings.Replace(oriStr, "ats", "etc/trafficserver", 1)
-	newStr = strings.Replace(newStr, "nginx", "etc/nginx", 1)
+	newStr = strings.Replace(newStr, "nginx", "etc/nginx", 1) //  /etc/nginx/v6-sc.miguvideo.com.conf
 	if strings.Contains(oriStr, "/"+domain+".conf") {
-		newStr = strings.Replace(newStr, "nginx", "etc/nginx/sites-enabled", 1)
+		newStr = strings.Replace(newStr, "nginx", "nginx/sites-enabled", 1) // /etc/nginx/sites-enabled/v6-sc.miguvideo.com.conf
 	} else if strings.Contains(oriStr, "/"+domain+"-l2.conf") {
-		newStr = strings.Replace(newStr, "nginx", "etc/nginx/sites-enabled", 1)
+		newStr = strings.Replace(newStr, "nginx", "nginx/sites-enabled", 1)
 	}
 	return newStr
+}
+
+// 4. 写文件
+func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1, domainMapList2 map[string][]string) (err error) {
+	// 新建文件和sheet
+	file := xlsx.NewFile()
+	sheet, err := file.AddSheet("sheet1")
+	if err != nil {
+		return err
+	}
+	//序号	域名	边缘下发文件名	边缘下发目标目录	上层下发文件名	上层下发插件目标目录
+	row := sheet.AddRow()
+	nameCell := row.AddCell()
+	nameCell.Value = "序号"
+	nameCell = row.AddCell()
+	nameCell.Value = "域名"
+	nameCell = row.AddCell()
+	nameCell.Value = "边缘下发文件名"
+	nameCell = row.AddCell()
+	nameCell.Value = "边缘下发目标目录"
+	nameCell = row.AddCell()
+	nameCell.Value = "上层下发文件名"
+	nameCell = row.AddCell()
+	nameCell.Value = "上层下发插件目标目录"
+
+	// 写文件
+	for domain, list := range domainMapList1 {
+		row := sheet.AddRow()
+		// 序号
+		nameCell := row.AddCell()
+		nameCell.Value = "1"
+		// 域名
+		nameCell = row.AddCell()
+		nameCell.Value = domain
+		// 边缘下发文件名
+		if domainMapTmp1[domain] != nil {
+			value2 := ""
+			for _, info := range domainMapTmp1[domain] {
+				value2 = value2 + info + "\n"
+			}
+			nameCell := row.AddCell()
+			nameCell.Value = value2
+		}
+		// 边缘下发目标目录
+		value1 := ""
+		for _, info := range list {
+			value1 = value1 + info + "\n"
+		}
+		nameCell = row.AddCell()
+		nameCell.Value = value1
+
+		// 上层下发文件名
+		if domainMapTmp2[domain] != nil {
+			value2 := ""
+			for _, info := range domainMapTmp2[domain] {
+				value2 = value2 + info + "\n"
+			}
+			nameCell := row.AddCell()
+			nameCell.Value = value2
+		}
+		// 上层下发插件目标目录
+		if domainMapList2[domain] != nil {
+			value2 := ""
+			for _, info := range domainMapList2[domain] {
+				value2 = value2 + info + "\n"
+			}
+			nameCell := row.AddCell()
+			nameCell.Value = value2
+		}
+
+	}
+	err = file.Save(fileName)
+	if err != nil {
+		return err
+	}
+	return nil
 }

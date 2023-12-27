@@ -1,0 +1,6 @@
+app.d.nf.migu.cn
+edu.sd.chinamobile.com
+h5.nf.migu.cn
+img01.netvan.cn
+qwhdcdn.cmcc-cs.cn
+res.coc.10086.cn

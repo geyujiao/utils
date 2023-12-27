@@ -1,0 +1,9 @@
+HY600/hlsdofviewmgspvod.miguvideo.com/CCS/ats/parent.config
+HY600/ywdofviewmgspvod.miguvideo.com/CCS/ats/parent.config
+
+
+
+
+HY600 实际是515个
+HY36  实际是8+6=14
+HY108 32+32+36=100
