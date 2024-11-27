@@ -5,6 +5,7 @@ import (
 )
 
 func TestReadOriginalData(t *testing.T) {
+	// RefererList("./referer.conf", "./referer-new.conf")
 	OriginalToEtc("./snspllua-txt.txt", "etc.xlsx")
 	// bytes, _ := json.Marshal(result1)
 	// println("result--", string(bytes))

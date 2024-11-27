@@ -1,10 +1,11 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/vgmdj/utils/logger"
 	"net/http"
 	"utils/request"
+
+	"github.com/gin-gonic/gin"
+	"github.com/vgmdj/utils/logger"
 )
 
 type PostJsonReq struct {
@@ -68,6 +69,12 @@ func Get(c *gin.Context) {
 	return
 }
 
+// Get
+func GetServerStatus(c *gin.Context) {
+	c.JSON(http.StatusOK, "get /server-status success")
+	return
+}
+
 // 测试request.PostFormDataFile
 func PostFormDataFile(c *gin.Context) {
 	file, _ := c.FormFile("video")
@@ -98,7 +105,7 @@ func PostFormFile(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, "PostFormFile---" + string(resp))
+	c.JSON(http.StatusOK, "PostFormFile---"+string(resp))
 
 	return
 }

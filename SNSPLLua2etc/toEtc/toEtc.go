@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/tealeg/xlsx"
@@ -84,7 +85,7 @@ func GetDomainMap(originalList []string) (domainMapList1, domainMapList2 map[str
 	}
 	domainMapList2 = make(map[string][]string, 0)
 	for _, original := range originalList {
-		if strings.Contains(original, "CCS") {
+		if strings.Contains(original, "CCS/") {
 			domain := strings.Split(original, "/")[1]
 			if _, exist := domainMapList1[domain]; !exist {
 				domainMapList2[domain] = make([]string, 0)
@@ -113,7 +114,7 @@ func GetDomainMapTmp(originalList []string) (domainMapTmp1, domainMapTmp2 map[st
 	}
 	domainMapTmp2 = make(map[string][]string, 0)
 	for _, original := range originalList {
-		if strings.Contains(original, "CCS") {
+		if strings.Contains(original, "CCS/") {
 			domain := strings.Split(original, "/")[1]
 			if _, exist := domainMapTmp2[domain]; !exist {
 				domainMapTmp2[domain] = make([]string, 0)
@@ -141,6 +142,9 @@ func ToEtc(domain, oriStr string) (newStr string) { //  /nginx/v6-sc.miguvideo.c
 
 // 4. 写文件
 func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1, domainMapList2 map[string][]string) (err error) {
+
+	domainList := ReadOriginalData("snspllua-domain.txt")
+
 	// 新建文件和sheet
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("sheet1")
@@ -154,6 +158,8 @@ func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1
 	nameCell = row.AddCell()
 	nameCell.Value = "域名"
 	nameCell = row.AddCell()
+	nameCell.Value = "需求"
+	nameCell = row.AddCell()
 	nameCell.Value = "边缘下发文件名"
 	nameCell = row.AddCell()
 	nameCell.Value = "边缘下发目标目录"
@@ -163,14 +169,19 @@ func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1
 	nameCell.Value = "上层下发插件目标目录"
 
 	// 写文件
-	for domain, list := range domainMapList1 {
+	for k, domainAndContent := range domainList {
+		str2 := strings.Split(domainAndContent, " ")
+		domain := str2[0]
 		row := sheet.AddRow()
 		// 序号
 		nameCell := row.AddCell()
-		nameCell.Value = "1"
+		nameCell.Value = strconv.Itoa(k + 1)
 		// 域名
 		nameCell = row.AddCell()
 		nameCell.Value = domain
+		// 需求
+		nameCell = row.AddCell()
+		nameCell.Value = str2[1]
 		// 边缘下发文件名
 		if domainMapTmp1[domain] != nil {
 			value2 := ""
@@ -182,7 +193,7 @@ func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1
 		}
 		// 边缘下发目标目录
 		value1 := ""
-		for _, info := range list {
+		for _, info := range domainMapList1[domain] {
 			value1 = value1 + info + "\n"
 		}
 		nameCell = row.AddCell()
@@ -208,9 +219,117 @@ func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1
 		}
 
 	}
+	// for domain, _ := range domainMapTmp1 {
+	// 	// str2 := strings.Split(domainAndContent, " ")
+	// 	// domain := str2[0]
+	// 	row := sheet.AddRow()
+	// 	// 序号
+	// 	nameCell := row.AddCell()
+	// 	nameCell.Value = strconv.Itoa(0 + 1)
+	// 	// 域名
+	// 	nameCell = row.AddCell()
+	// 	nameCell.Value = domain
+	// 	// 需求
+	// 	nameCell = row.AddCell()
+	// 	nameCell.Value = ""
+	// 	// 边缘下发文件名
+	// 	if domainMapTmp1[domain] != nil {
+	// 		value2 := ""
+	// 		for _, info := range domainMapTmp1[domain] {
+	// 			value2 = value2 + info + "\n"
+	// 		}
+	// 		nameCell := row.AddCell()
+	// 		nameCell.Value = value2
+	// 	}
+	// 	// 边缘下发目标目录
+	// 	value1 := ""
+	// 	for _, info := range domainMapList1[domain] {
+	// 		value1 = value1 + info + "\n"
+	// 	}
+	// 	nameCell = row.AddCell()
+	// 	nameCell.Value = value1
+
+	// 	// 上层下发文件名
+	// 	if domainMapTmp2[domain] != nil {
+	// 		value2 := ""
+	// 		for _, info := range domainMapTmp2[domain] {
+	// 			value2 = value2 + info + "\n"
+	// 		}
+	// 		nameCell := row.AddCell()
+	// 		nameCell.Value = value2
+	// 	}
+	// 	// 上层下发插件目标目录
+	// 	if domainMapList2[domain] != nil {
+	// 		value2 := ""
+	// 		for _, info := range domainMapList2[domain] {
+	// 			value2 = value2 + info + "\n"
+	// 		}
+	// 		nameCell := row.AddCell()
+	// 		nameCell.Value = value2
+	// 	}
+
+	// }
 	err = file.Save(fileName)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func RefererList(fileName, newFileName string) {
+	originalList := ReadOriginalData(fileName)
+	referMap := make(map[string]int)
+	for _, info := range originalList {
+		if _, exist := referMap[info]; !exist {
+			referMap[info] = 1
+		} else {
+			count := referMap[info]
+			referMap[info] = count + 1
+		}
+	}
+
+	newList := []string{}
+	for refer, count := range referMap {
+		if count > 1 {
+			println(fmt.Sprintf("refer=%s, count=%v", refer, count))
+		}
+		newList = append(newList, refer)
+	}
+	WriteFile(newList, newFileName)
+
+}
+
+func WriteFile(lines []string, filename string) {
+
+	// 创建/打开文件
+	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer file.Close() // 确保文件在函数结束时关闭
+
+	// 创建一个*Writer，用于按行写入
+	writer := bufio.NewWriter(file)
+
+	// 按行写入数据
+	for _, line := range lines {
+		_, err := writer.WriteString(line + "\n")
+		if err != nil {
+			fmt.Println("Error writing to file:", err)
+			return
+		}
+	}
+
+	// 确保所有数据都被刷新到文件中
+	err = writer.Flush()
+	if err != nil {
+		fmt.Println("Error flushing writer:", err)
+		return
+	}
+
+	// fmt.Println("文件写入成功，内容如下：")
+	// // 打印文件内容
+	// content, _ := os.ReadFile(filename)
+	// fmt.Print(string(content))
 }

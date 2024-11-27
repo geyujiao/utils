@@ -1,0 +1,35 @@
+
+
+// 1. v5-gz-a.douyinvod.com.conf 10+1
+{
+	"v5-gz-b.douyinvod.com", 
+	"v5-gz-c.douyinvod.com", 
+	"v5-gz-colda.douyinvod.com", 
+	"v5-gz-coldb.douyinvod.com", 
+	"v5-gz-coldc.douyinvod.com", 
+	"v5-gz-d.douyinvod.com", 
+	"v5-gzb-a.douyinvod.com", 
+	"v5-gzb-b.douyinvod.com", 
+	"v5-gzb-c.douyinvod.com", 
+	"v5-gz-coldd.douyinvod.com",
+}
+
+
+
+// 2. v96-gz-schedule-un.ixigua.com.conf 1+1
+  { 
+	"v96-gzb-schedule-un.ixigua.com",
+  }
+  
+// 3. v96-jn.douyinvod.com.conf 6+1
+          
+{
+  "v96-nj.douyinvod.com", 
+  "v96-wh.douyinvod.com", 
+  "v96-wh-a.douyinvod.com", 
+  "v96-nj-a.douyinvod.com", 
+  "v96-jn-a.douyinvod.com", 
+  "v96-wha.douyinvod.com",
+
+}
+  

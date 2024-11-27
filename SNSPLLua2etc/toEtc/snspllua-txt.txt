@@ -1,10 +1,2 @@
-migu/v6-sc.miguvideo.com/CCS/ats/remap.config
-migu/v6-sc.miguvideo.com/CCS/nginx/v6-sc.miguvideo.com-l2.conf
-migu/v6-sc.miguvideo.com/SNS/ats/parent.config
-migu/v6-sc.miguvideo.com/SNS/ats/remap.config
-migu/v6-sc.miguvideo.com/SNS/nginx/v6-sc.miguvideo.com.conf
-migu/v7-sc.miguvideo.com/CCS/ats/remap.config
-migu/v7-sc.miguvideo.com/CCS/nginx/v7-sc.miguvideo.com-l2.conf
-migu/v7-sc.miguvideo.com/SNS/ats/parent.config
-migu/v7-sc.miguvideo.com/SNS/ats/remap.config
-migu/v7-sc.miguvideo.com/SNS/nginx/v7-sc.miguvideo.com.conf
+migu/zqhswlive.itv.cmvideo.cn/SNS/nginx/zqhswlive.itv.cmvideo.cn.conf
+migu/studentlive.migucloud.com/SNS/nginx/studentlive.migucloud.com.conf
