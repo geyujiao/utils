@@ -1,0 +1,23 @@
+cookie
+L1/nginx/lua/honor/logmerge_honor.lua: ---ok
+L2/nginx/lua/honor/logmerge_honor.lua: --ok
+L2/nginx/lua/originiqiyi/origin_iqiyi_header_filter_l2.lua: --ok
+
+referer
+无
+
+user_agent  和 uri 
+L1/nginx/lua/logmerge.lua:---ok
+L1/nginx/lua/tsvp2_migu_logmerge.lua: ----ok----HY108/shipei/migu/tsvp2.miguvideo.com/SNS/nginx/lua/tsvp2_migu_logmerge.lua
+L1/nginx/lua/gdyunchen/yunchen_header.lua:---ok
+L1/nginx/lua/honor/logmerge_honor.lua:  -------不用改
+L1/nginx/lua/originiqiyi/origin_iqiyi_header_filter.lua:---ok
+L1/nginx/lua/toutiao/bytedance_header.lua:---ok
+L1/nginx/lua/toutiao/bytedance_image_header.lua:---ok
+L2/nginx/lua/bytedance_zx_header.lua:---ok
+L2/nginx/lua/logmerge.lua:----ok
+L2/nginx/lua/tsvp2_migu_logmerge-l2.lua:
+L2/nginx/lua/gdyunchen/yunchen_header-l2.lua:
+L2/nginx/lua/honor/logmerge_honor.lua:  -------不用改
+L2/nginx/lua/originiqiyi/origin_iqiyi_header_filter_l2.lua: ---不用改
+L2/nginx/lua/toutiao/bytedance_zx_scyd_header.lua:---ok

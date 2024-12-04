@@ -1,0 +1,142 @@
+51 results - 14 files
+
+L1/nginx/lua/logmerge.lua:
+  196  
+  197: -- user_agent中的|替换为空格
+  198  local function urlEncode(s)
+
+  201  end
+  202: local ua = ngx.var.http_user_agent or "-"
+  203  if ua == "" then
+  204:     ngx.var.user_agent = "-"
+  205  else
+  206:     ngx.var.user_agent = urlEncode(ua)
+  207  end
+
+L1/nginx/lua/tsvp2_migu_logmerge.lua:
+  41   
+  42: -- user_agent中的|替换为空格 
+  43: local ua = ngx.var.http_user_agent 
+  44  if ua == nil or ua == "" then 
+  45:     ngx.var.user_agent = "NULL" 
+  46  else 
+  47:     ngx.var.user_agent = string.gsub(ua, "|", " ") 
+  48  end 
+
+L1/nginx/lua/gdyunchen/yunchen_header.lua:
+  61  
+  62: local ua = ngx.var.http_user_agent
+  63  if ua == nil or ua == "" then
+  64:     ngx.var.user_agent = "NULL"
+  65  else
+  66:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  67  end
+
+L1/nginx/lua/honor/logmerge_honor.lua:
+  199  
+  200: -- user_agent中的|替换为空格
+  201: local ua = ngx.var.http_user_agent
+  202  if ua == nil or ua == "" then
+  203:     ngx.var.user_agent = "-"
+  204  else
+  205:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  206  end
+
+L1/nginx/lua/originiqiyi/origin_iqiyi_header_filter.lua:
+  149   
+  150: -- user_agent中的|替换为空格 
+  151: local ua = ngx.var.http_user_agent 
+  152  if ua == nil or ua == "" then 
+  153:     ngx.var.user_agent = "NULL" 
+  154  else 
+  155:     ngx.var.user_agent = string.gsub(ua, "|", " ") 
+  156  end 
+
+L1/nginx/lua/toutiao/bytedance_header.lua:
+  49  
+  50: local ua = ngx.var.http_user_agent
+  51  if ua == nil or ua == "" then
+  52:     ngx.var.user_agent = "NULL"
+  53  else
+  54:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  55  end
+
+L1/nginx/lua/toutiao/bytedance_image_header.lua:
+  50  
+  51: -- user_agent中的|替换为空格
+  52: local ua = ngx.var.http_user_agent
+  53  if ua == nil or ua == "" then
+  54:     ngx.var.user_agent = "NULL"
+  55  else
+  56:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  57  end
+
+L2/nginx/lua/bytedance_zx_header.lua:
+  182  
+  183: local ua = ngx.var.http_user_agent
+  184  if ua == nil or ua == "" then
+  185:     ngx.var.user_agent = "NULL"
+  186  else
+  187:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  188  end
+
+L2/nginx/lua/logmerge.lua:
+  196  
+  197: -- user_agent中的|替换为空格
+  198  local function urlEncode(s)
+
+  201  end
+  202: local ua = ngx.var.http_user_agent or "-"
+  203  if ua == "" then
+  204:     ngx.var.user_agent = "-"
+  205  else
+  206:     ngx.var.user_agent = urlEncode(ua)
+  207  end
+
+L2/nginx/lua/tsvp2_migu_logmerge-l2.lua:
+  41   
+  42: -- user_agent中的|替换为空格 
+  43: local ua = ngx.var.http_user_agent 
+  44  if ua == nil or ua == "" then 
+  45:     ngx.var.user_agent = "NULL" 
+  46  else 
+  47:     ngx.var.user_agent = string.gsub(ua, "|", " ") 
+  48  end 
+
+L2/nginx/lua/gdyunchen/yunchen_header-l2.lua:
+  47  
+  48: local ua = ngx.var.http_user_agent
+  49  if ua == nil or ua == "" then
+  50:     ngx.var.user_agent = "NULL"
+  51  else
+  52:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  53  end
+
+L2/nginx/lua/honor/logmerge_honor.lua:
+  199  
+  200: -- user_agent中的|替换为空格
+  201: local ua = ngx.var.http_user_agent
+  202  if ua == nil or ua == "" then
+  203:     ngx.var.user_agent = "-"
+  204  else
+  205:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  206  end
+
+L2/nginx/lua/originiqiyi/origin_iqiyi_header_filter_l2.lua:
+  92  
+  93: -- user_agent中的|替换为空格
+  94: local ua = ngx.var.http_user_agent
+  95  if ua == nil or ua == "" then
+  96:     ngx.var.user_agent = "NULL"
+  97  else
+  98:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  99  end
+
+L2/nginx/lua/toutiao/bytedance_zx_scyd_header.lua:
+  27  
+  28: local ua = ngx.var.http_user_agent
+  29  if ua == nil or ua == "" then
+  30:     ngx.var.user_agent = "NULL"
+  31  else
+  32:     ngx.var.user_agent = string.gsub(ua, "|", " ")
+  33  end

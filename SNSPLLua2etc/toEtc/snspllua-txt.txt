@@ -1,2 +1,2 @@
-migu/zqhswlive.itv.cmvideo.cn/SNS/nginx/zqhswlive.itv.cmvideo.cn.conf
-migu/studentlive.migucloud.com/SNS/nginx/studentlive.migucloud.com.conf
+migu5xx/common2-sc.miguvideo.com/SNS/ats/remap.config
+migu5xx/common2-sc.miguvideo.com/CCS/ats/remap.config

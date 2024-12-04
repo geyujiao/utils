@@ -1,2 +1,1 @@
-zqhswlive.itv.cmvideo.cn 打开channel-id检查
-studentlive.migucloud.com 打开channel-id检查
+common2-sc.miguvideo.com 咪咕视讯9个域名修改4xx5xx缓存策略

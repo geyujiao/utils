@@ -14,14 +14,14 @@ func TestLogProcess_Process(t *testing.T) {
 	}
 
 	log := &LogProcess{
-		Rc: make(chan string, 1),
-		Wc: make(chan string, 1),
-		Read: reader,
+		Rc:    make(chan string, 1),
+		Wc:    make(chan string, 1),
+		Read:  reader,
 		Write: writer,
 	}
 	go log.Read.Read(log.Rc)
 	go log.Process()
 	go log.Write.Write(log.Rc)
 
-	time.Sleep(5 *time.Second)
+	time.Sleep(5 * time.Second)
 }

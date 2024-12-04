@@ -1,0 +1,163 @@
+66 results - 14 files
+
+L1/nginx/lua/logmerge.lua:
+  240  
+  241: local request_uri = ngx.var.request_uri or '-'
+  242  local host = ngx.var.host or '-'
+  243  local urlhash = 0
+  244: local url = http_protocol .. host .. request_uri
+  245  if #url <= 60 then
+
+  341  
+  342: function atsLogUriTransform(str)
+  343:     -- 正则获取atslog中的uri,并转译输出
+  344      local atsRegex = "^((?:(?:[^\\|]+)\\|){6})(.*)((?:\\|(?:[^\\|]+)){13})$"
+
+  356  
+  357: atslog = atsLogUriTransform(atslog)
+  358  
+
+L1/nginx/lua/tsvp2_migu_logmerge.lua:
+  66   
+  67: local request_uri = ngx.var.request_uri or 'NULL' 
+  68  local host = ngx.var.host or 'NULL' 
+  69  local urlhash = 0 
+  70: local url = http_protocol .. host .. request_uri 
+  71  if #url <= 60 then 
+
+L1/nginx/lua/gdyunchen/yunchen_header.lua:
+  84  
+  85: local request_uri = ngx.var.request_uri or 'NULL'
+  86  local host = ngx.var.host or 'NULL'
+  87  local urlhash = 0
+  88: local url = http_protocol .. host .. request_uri
+  89  if #url <= 60 then
+
+L1/nginx/lua/honor/logmerge_honor.lua:
+   89  
+   90:     local res = string.format("%s://%s%s%s", ngx.var.scheme, ngx.var.host, ngx.var.uri, req_args)
+   91  
+
+  232  
+  233: local request_uri = ngx.var.request_uri or '-'
+  234  local host = ngx.var.host or '-'
+  235  local urlhash = 0
+  236: local url = http_protocol .. host .. request_uri
+  237  if #url <= 60 then
+
+L1/nginx/lua/originiqiyi/origin_iqiyi_header_filter.lua:
+   18  --12.26 
+   19: function extension(uri) 
+   20:     return uri:match(".+%.(%w+)$") 
+   21  end 
+   22: local suffix = extension(ngx.var.uri) 
+   23   
+
+   25  if suffix == 'f4v' and nil ~= ngx.header['Content-Range'] and "" ~= ngx.header['Content-Range'] then 
+   26:   local args = ngx.req.get_uri_args() 
+   27    local arg_start = args['start'] or "" 
+
+   85  	if suffix == 'ts' or suffix == 'm2ts' then 
+   86: 		local l_ts_mts_path = ngx.re.match(ngx.var.uri,"^(/videos/ots/|/qpdxv/ots/|/videos/vts/|/qpdxv/vts/|/tslive/|/qpdxv/v1ts/|/videos/v1ts/|/videos/saas-hk/)") 
+   87  		if not l_ts_mts_path then 
+
+  174   
+  175: local request_uri = ngx.var.request_uri or 'NULL' 
+  176  local host = ngx.var.host or 'NULL' 
+  177  local urlhash = 0 
+  178: local url = http_protocol .. host .. request_uri 
+  179  if #url <= 60 then 
+
+L1/nginx/lua/toutiao/bytedance_header.lua:
+   72  
+   73: local request_uri = ngx.var.request_uri or 'NULL'
+   74  local host = ngx.var.host or 'NULL'
+   75  local urlhash = 0
+   76: local url = http_protocol .. host .. request_uri
+   77: if ngx.var.zy_request_uri ~= nil and ngx.var.zy_request_uri == "-" then
+   78:     ngx.var.zy_request_uri = string.gsub(request_uri,"|","%%7C")
+   79  end
+
+  231  
+  232: local uri_args = ngx.req.get_uri_args()  
+  233: for k, v in pairs(uri_args) do  
+  234      if k == "mime_type" and type(v) == "table" then
+
+L1/nginx/lua/toutiao/bytedance_image_header.lua:
+  75  
+  76: local request_uri = ngx.var.request_uri or 'NULL'
+  77  local host = ngx.var.host or 'NULL'
+  78  local urlhash = 0
+  79: local url = http_protocol .. host .. request_uri
+  80  if #url <= 60 then
+
+L2/nginx/lua/bytedance_zx_header.lua:
+  212  
+  213: local request_uri = ngx.var.request_uri or 'NULL'
+  214  local host = ngx.var.host or 'NULL'
+  215  local urlhash = 0
+  216: local url = http_protocol .. host .. request_uri
+  217: if ngx.var.zy_request_uri ~= nil and ngx.var.zy_request_uri == "-" then
+  218:     ngx.var.zy_request_uri = string.gsub(request_uri,"|","%%7C")
+  219  end
+
+L2/nginx/lua/logmerge.lua:
+  240  
+  241: local request_uri = ngx.var.request_uri or '-'
+  242  local host = ngx.var.host or '-'
+  243  local urlhash = 0
+  244: local url = http_protocol .. host .. request_uri
+  245  if #url <= 60 then
+
+  341  
+  342: function atsLogUriTransform(str)
+  343:     -- 正则获取atslog中的uri,并转译输出
+  344      local atsRegex = "^((?:(?:[^\\|]+)\\|){6})(.*)((?:\\|(?:[^\\|]+)){13})$"
+
+  356  
+  357: atslog = atsLogUriTransform(atslog)
+  358  
+
+L2/nginx/lua/tsvp2_migu_logmerge-l2.lua:
+  66   
+  67: local request_uri = ngx.var.request_uri or 'NULL' 
+  68  local host = ngx.var.host or 'NULL' 
+  69  local urlhash = 0 
+  70: local url = http_protocol .. host .. request_uri 
+  71  if #url <= 60 then 
+
+L2/nginx/lua/gdyunchen/yunchen_header-l2.lua:
+  70  
+  71: local request_uri = ngx.var.request_uri or 'NULL'
+  72  local host = ngx.var.host or 'NULL'
+  73  local urlhash = 0
+  74: local url = http_protocol .. host .. request_uri
+  75  if #url <= 60 then
+
+L2/nginx/lua/honor/logmerge_honor.lua:
+   89  
+   90:     local res = string.format("%s://%s%s%s", ngx.var.scheme, ngx.var.host, ngx.var.uri, req_args)
+   91  
+
+  232  
+  233: local request_uri = ngx.var.request_uri or '-'
+  234  local host = ngx.var.host or '-'
+  235  local urlhash = 0
+  236: local url = http_protocol .. host .. request_uri
+  237  if #url <= 60 then
+
+L2/nginx/lua/originiqiyi/origin_iqiyi_header_filter_l2.lua:
+  117  
+  118: local request_uri = ngx.var.request_uri or 'NULL'
+  119  local host = ngx.var.host or 'NULL'
+  120  local urlhash = 0
+  121: local url = http_protocol .. host .. request_uri
+  122  if #url <= 60 then
+
+L2/nginx/lua/toutiao/bytedance_zx_scyd_header.lua:
+  50  
+  51: local request_uri = ngx.var.request_uri or 'NULL'
+  52  local host = ngx.var.host or 'NULL'
+  53  local urlhash = 0
+  54: local url = http_protocol .. host .. request_uri
+  55  if #url <= 60 then

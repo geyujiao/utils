@@ -1,0 +1,7 @@
+
+cp -Rf ./20230706-字节新架构/v5-mc-lite-c.douyinvod.com  ./$BASELINE/bytedance/
+
+cp -Rf ./20230706-字节新架构/v5-mc-reading-video-a.qznovelvod.com  ./$BASELINE/bytedance/
+cp -Rf ./20230706-字节新架构/v5-mc-reading-video-b.qznovelvod.com  ./$BASELINE/bytedance/
+cp -Rf ./20230706-字节新架构/v5-mc-be-pack.pglstatp-toutiao.com  ./$BASELINE/bytedance/
+cp -Rf ./20230706-字节新架构/v5-mc-reading-video.fqnovelvod.com  ./$BASELINE/bytedance/
