@@ -2,9 +2,10 @@ package excel
 
 import (
 	"encoding/json"
-	"github.com/tealeg/xlsx"
-	"github.com/vgmdj/utils/logger"
+	"fmt"
 	"strings"
+
+	"github.com/tealeg/xlsx"
 )
 
 type Msg struct {
@@ -39,7 +40,7 @@ func JsonToExcel() (err error) {
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("sheet1")
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	// 写文件
@@ -52,10 +53,10 @@ func JsonToExcel() (err error) {
 	}
 	err = file.Save(outFile)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
-	logger.Info("write file success")
+	fmt.Println("write file success")
 
 	return nil
 }
@@ -67,7 +68,7 @@ func InitList() {
 	// json 转化为 list
 	if len(List) == 0 {
 		if err := json.Unmarshal([]byte(jsonStr), &List); err != nil {
-			logger.Error(err.Error())
+			fmt.Println(err.Error())
 		}
 
 	}
@@ -91,7 +92,7 @@ func InitJsonStr() {
 		tmpStr = strings.TrimRight(tmpStr, ",")
 		jsonStr = "[" + tmpStr + "]"
 	}
-	logger.Info(jsonStr)
+	fmt.Println(jsonStr)
 }
 
 const oldStrTest = `

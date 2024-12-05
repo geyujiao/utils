@@ -87,7 +87,7 @@ func GetDomainMap(originalList []string) (domainMapList1, domainMapList2 map[str
 	for _, original := range originalList {
 		if strings.Contains(original, "CCS/") {
 			domain := strings.Split(original, "/")[1]
-			if _, exist := domainMapList1[domain]; !exist {
+			if _, exist := domainMapList2[domain]; !exist {
 				domainMapList2[domain] = make([]string, 0)
 			}
 			info := strings.Split(original, "CCS")[1]
@@ -183,14 +183,12 @@ func WriteExcelEtc(fileName string, domainMapTmp1, domainMapTmp2, domainMapList1
 		nameCell = row.AddCell()
 		nameCell.Value = str2[1]
 		// 边缘下发文件名
-		if domainMapTmp1[domain] != nil {
-			value2 := ""
-			for _, info := range domainMapTmp1[domain] {
-				value2 = value2 + info + "\n"
-			}
-			nameCell := row.AddCell()
-			nameCell.Value = value2
+		value2 := ""
+		for _, info := range domainMapTmp1[domain] {
+			value2 = value2 + info + "\n"
 		}
+		nameCell = row.AddCell()
+		nameCell.Value = value2
 		// 边缘下发目标目录
 		value1 := ""
 		for _, info := range domainMapList1[domain] {

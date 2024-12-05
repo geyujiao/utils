@@ -1,19 +1,17 @@
 package sms
 
-
 import (
 	"encoding/json"
 	"fmt"
 
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/requests"
-	"github.com/vgmdj/utils/logger"
 )
 
 func SendSms(accessKeyId, accessSecret, signName, templateCode, phoneNumbers, templateParam string) error {
 	client, err := sdk.NewClientWithAccessKey("default", accessKeyId, accessSecret)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 
@@ -30,14 +28,14 @@ func SendSms(accessKeyId, accessSecret, signName, templateCode, phoneNumbers, te
 
 	response, err := client.ProcessCommonRequest(request)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	result := smsResponse{}
 	json.Unmarshal(response.GetHttpContentBytes(), &result)
 	if result.Code != "OK" {
-		logger.Info("response", response.GetHttpContentString())
-		logger.Error(result.Message)
+		fmt.Println("response", response.GetHttpContentString())
+		fmt.Println(result.Message)
 		return fmt.Errorf("%s", result.Message)
 	}
 	return nil
@@ -49,4 +47,3 @@ type smsResponse struct {
 	BizId     string
 	Code      string
 }
-

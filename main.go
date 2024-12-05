@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"github.com/vgmdj/utils/logger"
 	"time"
 	"utils/router"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
-func main()  {
+func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -24,10 +24,11 @@ func main()  {
 	address := fmt.Sprintf(":83")
 	err := r.Run(address)
 	if err != nil {
-		logger.Error("start http server error:", err.Error())
+		fmt.Println("start http server error:", err.Error())
 		return
 	}
 }
+
 //
 //func main()  {
 //	reader := &study.ReadFile{

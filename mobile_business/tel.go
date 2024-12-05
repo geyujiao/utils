@@ -3,11 +3,11 @@ package library
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/axgle/mahonia"
-	"github.com/vgmdj/utils/logger"
 	"io/ioutil"
 	"net/http"
 	"strings"
+
+	"github.com/axgle/mahonia"
 )
 
 /*
@@ -56,27 +56,27 @@ func Tel(mobile string) (data Data, err error) {
 
 	resp, err := http.NewRequest("GET", host+path+mobile, nil)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	resp.Header.Add("Authorization", "APPCODE f930addaadc745f3b501c3bd139c0085")
 
 	response, err := client.Do(resp) //提交
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	body, err := ioutil.ReadAll(response.Body)
-	logger.Info("resp body", string(body))
+	fmt.Println("resp body", string(body))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	var TelBody = Body{}
 	err = json.Unmarshal(body, &TelBody)
 	if err != nil {
-		logger.Info("resp body", string(body))
-		logger.Error(err.Error())
+		fmt.Println("resp body", string(body))
+		fmt.Println(err.Error())
 		return Data{Mobile: mobile}, err
 	}
 	TelBody.Data.Mobile = mobile
@@ -109,16 +109,15 @@ func TccTel(mobile string) string {
 
 }
 
-//
-//__GetZoneResult_ = {
-//mts:'1585078',
-//province:'江苏',
-//catName:'中国移动',
-//telString:'15850781443',
-//areaVid:'30511',
-//ispVid:'3236139',
-//carrier:'江苏移动'
-//}
+// __GetZoneResult_ = {
+// mts:'1585078',
+// province:'江苏',
+// catName:'中国移动',
+// telString:'15850781443',
+// areaVid:'30511',
+// ispVid:'3236139',
+// carrier:'江苏移动'
+// }
 type TelTmpResp struct {
 	GetZoneResult GetZoneResult `json:"__GetZoneResult_"`
 }
@@ -131,41 +130,41 @@ type GetZoneResult struct {
 
 // （淘宝） // 归属地只有省没有市
 func TelTmp(mobile string) (data Data, err error) {
-	logger.Info("----mobile----", mobile)
+	fmt.Println("----mobile----", mobile)
 	client := &http.Client{}
 	host := "http://tcc.taobao.com/cc/json/mobile_tel_segment.htm"
 	path := "?tel="
 
 	resp, err := http.NewRequest("GET", host+path+mobile, nil)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	resp.Header.Add("Authorization", "APPCODE f930addaadc745f3b501c3bd139c0085")
 
 	response, err := client.Do(resp) //提交
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 	b := strings.Split(string(body), "carrier:'")
 	if len(b) != 2 {
 		err = fmt.Errorf("body 解析失败")
-		logger.Info("resp body", string(body))
-		logger.Error(err.Error())
+		fmt.Println("resp body", string(body))
+		fmt.Println(err.Error())
 		return data, err
 	}
-	logger.Info(b[1])
+	fmt.Println(b[1])
 	result := mahonia.NewDecoder("gbk").ConvertString(b[1])
 	str := strings.Split(result, "'")
 	fmt.Println(str[0], "======")
 
-	logger.Info("len", len(str[0]))
+	fmt.Println("len", len(str[0]))
 
 	data = Data{
 		Mobile: mobile,

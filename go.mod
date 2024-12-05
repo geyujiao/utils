@@ -1,21 +1,48 @@
 module utils
 
-go 1.15
+go 1.20
 
 require (
-	github.com/aliyun/alibaba-cloud-sdk-go v1.61.487
-	github.com/aliyun/aliyun-oss-go-sdk v2.1.5+incompatible
+	github.com/aliyun/alibaba-cloud-sdk-go v1.63.63
+	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
-	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
-	github.com/gin-contrib/cors v1.3.1
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-contrib/cors v1.7.2
+	github.com/gin-gonic/gin v1.10.0
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
-	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/tealeg/xlsx v1.0.5
-	github.com/tuotoo/qrcode v0.0.0-20190222102259-ac9c44189bf2
-	github.com/vgmdj/utils v0.0.0-20191030061522-4bf44b6b6234
-	github.com/willf/bitset v1.1.11 // indirect
-	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
-	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
+)
+
+require (
+	github.com/bytedance/sonic v1.11.6 // indirect
+	github.com/bytedance/sonic/loader v0.1.1 // indirect
+	github.com/cloudwego/base64x v0.1.4 // indirect
+	github.com/cloudwego/iasm v0.2.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
+	github.com/gin-contrib/sse v0.1.0 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.20.0 // indirect
+	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
+	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
+	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
+	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
+	github.com/ugorji/go/codec v1.2.12 // indirect
+	golang.org/x/arch v0.8.0 // indirect
+	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/sys v0.20.0 // indirect
+	golang.org/x/text v0.15.0 // indirect
+	golang.org/x/time v0.8.0 // indirect
+	google.golang.org/protobuf v1.34.1 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
+	gopkg.in/ini.v1 v1.67.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -2,7 +2,6 @@ package chars
 
 import (
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 	"math"
 	"math/rand"
 	"strconv"
@@ -10,11 +9,11 @@ import (
 	"time"
 )
 
-//ToInt 转换成int格式
+// ToInt 转换成int格式
 func ToInt(num interface{}) int {
 	switch num.(type) {
 	default:
-		logger.Error("invalid type ", num)
+		fmt.Println("invalid type ", num)
 		return 0
 
 	case string:
@@ -58,11 +57,11 @@ func ToInt(num interface{}) int {
 	}
 }
 
-//ToFloat64 转换成float64格式
+// ToFloat64 转换成float64格式
 func ToFloat64(num interface{}) float64 {
 	switch num.(type) {
 	default:
-		logger.Error("invalid type ", num)
+		fmt.Println("invalid type ", num)
 		return 0
 
 	case float64:
@@ -87,7 +86,7 @@ func ToFloat64(num interface{}) float64 {
 	}
 }
 
-//ToString 转换成string
+// ToString 转换成string
 func ToString(num interface{}, prec ...int) string {
 	var p = 2
 	if len(prec) != 0 {
@@ -96,7 +95,7 @@ func ToString(num interface{}, prec ...int) string {
 
 	switch num.(type) {
 	default:
-		logger.Error("invalid type ", num)
+		fmt.Println("invalid type ", num)
 		return ""
 
 	case string:
@@ -144,7 +143,6 @@ func ToString(num interface{}, prec ...int) string {
 	}
 }
 
-
 func addZero(n int) string {
 	result := ""
 	for i := 0; i < n; i++ {
@@ -155,12 +153,11 @@ func addZero(n int) string {
 }
 
 // float保留两位小数
-func FloatRetain(f float64) float64  {
+func FloatRetain(f float64) float64 {
 	value, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", f), 64)
 
 	return value
 }
-
 
 // 生成随机字符串
 func GetRandomString(l int) string {

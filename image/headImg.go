@@ -3,7 +3,6 @@ package image
 import (
 	"bytes"
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 	"image"
 	"image/color"
 	"image/draw"
@@ -61,7 +60,7 @@ func PutObjectFromReaderBase64(endpoint, accessKeyId, accessKeySecret, bucketNam
 	return
 }
 
-//删除指定object
+// 删除指定object
 func DeleteObject(endpoint, accessKeyId, accessKeySecret, bucketName, objectName string) (err error) {
 	// 创建OSSClient实例。
 	client, err := oss.New(endpoint, accessKeyId, accessKeySecret)
@@ -117,17 +116,17 @@ func handleError(err error) {
 func CompressImageResourceJpeg(data []byte) []byte {
 	img, _, err := image.Decode(bytes.NewReader(data))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data
 	}
 	buf := bytes.Buffer{}
 	err = jpeg.Encode(&buf, img, &jpeg.Options{Quality: 40})
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data
 	}
 	if buf.Len() > len(data) {
-		logger.Error("buf.Len() ", buf.Len(), "len(data)", len(data))
+		fmt.Println("buf.Len() ", buf.Len(), "len(data)", len(data))
 		return data
 	}
 	return buf.Bytes()
@@ -137,7 +136,7 @@ func CompressImageResourceJpeg(data []byte) []byte {
 func CompressImageResourcePng(data []byte) []byte {
 	imgSrc, _, err := image.Decode(bytes.NewReader(data))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return []byte{}
 	}
 	newImg := image.NewRGBA(imgSrc.Bounds())
@@ -147,11 +146,11 @@ func CompressImageResourcePng(data []byte) []byte {
 	buf := bytes.Buffer{}
 	err = jpeg.Encode(&buf, newImg, &jpeg.Options{Quality: 40})
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return []byte{}
 	}
 	if buf.Len() > len(data) {
-		logger.Error("buf.Len() ", buf.Len(), "len(data)", len(data))
+		fmt.Println("buf.Len() ", buf.Len(), "len(data)", len(data))
 		return []byte{}
 	}
 	return buf.Bytes()
@@ -161,7 +160,7 @@ func ImageUrlToBase64(imgUrl string) []byte {
 	//获取远端图片
 	res, err := http.Get(imgUrl)
 	if err != nil {
-		logger.Error("A error occurred!")
+		fmt.Println("A error occurred!")
 		return []byte{}
 	}
 	defer res.Body.Close()
@@ -170,6 +169,6 @@ func ImageUrlToBase64(imgUrl string) []byte {
 
 	return data
 	//imageBase64 := base64.StdEncoding.EncodeToString(data)
-	////logger.Info("base64", imageBase64)
+	////fmt.Println("base64", imageBase64)
 	//return imageBase64
 }

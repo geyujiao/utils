@@ -99,7 +99,7 @@ func GetFileType(fSrc []byte) string {
 	var fileType string
 	fileCode := bytesToHexString(fSrc)
 
-	//logger.Info("ffffffff", fileCode)
+	//fmt.Println("ffffffff", fileCode)
 	fileTypeMap.Range(func(key, value interface{}) bool {
 		k := key.(string)
 		v := value.(string)

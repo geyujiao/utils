@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 	"io"
 	"io/ioutil"
 	"math/rand"
@@ -31,12 +30,11 @@ type GlobalWechat struct {
 	SignNoncestr  string // 随机串
 }
 
-//签名生成规则如下：
-//参与签名的字段包括 noncestr（随机字符串）,有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。
-//对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，
-//使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1。
-//这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义。
-//
+// 签名生成规则如下：
+// 参与签名的字段包括 noncestr（随机字符串）,有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。
+// 对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，
+// 使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1。
+// 这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义。
 func (g *GlobalWechat) GetSign(url string) {
 	noncestr := RandString(16)
 	timestamp := time.Now().Unix()
@@ -47,7 +45,7 @@ func (g *GlobalWechat) GetSign(url string) {
 	sign := string(t.Sum(nil))
 
 	sign = hex.EncodeToString(t.Sum(nil))
-	logger.Info("sign", sign)
+	fmt.Println("sign", sign)
 
 	g.Sign = sign
 	g.SignTimestamp = timestamp
@@ -77,7 +75,7 @@ type JsapiticketResp struct {
 func (g *GlobalWechat) GetJsapiticket() (err error) {
 	if g.Ticket.Timestamp.Add(time.Duration(g.Ticket.ExpiresIn) * time.Second).
 		After(time.Now().Add(5 * time.Minute)) {
-		logger.Info("g.JsapiticketResp.Ticket", g.Ticket.Ticket)
+		fmt.Println("g.JsapiticketResp.Ticket", g.Ticket.Ticket)
 	} else {
 
 		urlstr := `https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi`
@@ -87,10 +85,10 @@ func (g *GlobalWechat) GetJsapiticket() (err error) {
 			defer response.Body.Close()
 			body, err := ioutil.ReadAll(response.Body)
 			if err != nil {
-				logger.Error(err.Error())
+				fmt.Println(err.Error())
 				return err
 			}
-			logger.Info("ticket resp body", string(body))
+			fmt.Println("ticket resp body", string(body))
 
 			tickeResp := new(JsapiticketResp)
 			if err := json.Unmarshal(body, &tickeResp); err == nil {
@@ -101,12 +99,12 @@ func (g *GlobalWechat) GetJsapiticket() (err error) {
 				tickeResp.Timestamp = time.Now()
 				g.Ticket = tickeResp
 			} else {
-				logger.Error(err.Error())
+				fmt.Println(err.Error())
 				return err
 
 			}
 		} else {
-			logger.Error(err.Error())
+			fmt.Println(err.Error())
 			return err
 
 		}
@@ -118,7 +116,7 @@ func (g *GlobalWechat) GetJsapiticket() (err error) {
 func (g *GlobalWechat) GetGlobalAccessToken() (err error) {
 	if g.AccessToken.Timestamp.Add(time.Duration(g.AccessToken.ExpiresIn) * time.Second).
 		After(time.Now().Add(5 * time.Minute)) {
-		logger.Info("g.AccessToken", g.AccessToken.AccessToken)
+		fmt.Println("g.AccessToken", g.AccessToken.AccessToken)
 	} else {
 		urlstr := `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s`
 		urlstr = fmt.Sprintf(urlstr, WeChatAppID, WeChatAppsecret)
@@ -127,11 +125,11 @@ func (g *GlobalWechat) GetGlobalAccessToken() (err error) {
 			defer response.Body.Close()
 			body, err := ioutil.ReadAll(response.Body)
 			if err != nil {
-				logger.Error(err.Error())
+				fmt.Println(err.Error())
 				return err
 
 			}
-			logger.Info("accesstoken resp body", string(body))
+			fmt.Println("accesstoken resp body", string(body))
 
 			accesstoken := new(AccessToken)
 			if err := json.Unmarshal(body, &accesstoken); err == nil {
@@ -142,12 +140,12 @@ func (g *GlobalWechat) GetGlobalAccessToken() (err error) {
 				accesstoken.Timestamp = time.Now()
 				g.AccessToken = accesstoken
 			} else {
-				logger.Error(err.Error())
+				fmt.Println(err.Error())
 				return err
 
 			}
 		} else {
-			logger.Error(err.Error())
+			fmt.Println(err.Error())
 			return err
 
 		}
@@ -167,7 +165,7 @@ func init() {
 
 }
 
-//RandString 随机字符串
+// RandString 随机字符串
 func RandString(n int) string {
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 

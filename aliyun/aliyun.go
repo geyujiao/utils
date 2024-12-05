@@ -1,12 +1,10 @@
 package aliyun
 
-
 import (
 	"bytes"
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 	"io"
 	"strconv"
 	"strings"
@@ -16,27 +14,27 @@ import (
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 )
 
-const  (
-	endpoint = ""
-	accessKeyId = ""
+const (
+	endpoint        = ""
+	accessKeyId     = ""
 	accessKeySecret = ""
-	bucketName = ""
+	bucketName      = ""
 )
 
 // oss 上传文件
-func PutObjectFromReader(endpoint, accessKeyId, accessKeySecret, bucketName, objectName string, objectValue io.Reader, path string) (URL string,err error) {
+func PutObjectFromReader(endpoint, accessKeyId, accessKeySecret, bucketName, objectName string, objectValue io.Reader, path string) (URL string, err error) {
 	// 创建OSSClient实例。
 	client, err := oss.New(endpoint, accessKeyId, accessKeySecret)
 	if err != nil {
-		logger.Error(err.Error())
-		return "",err
+		fmt.Println(err.Error())
+		return "", err
 	}
 
 	// 获取存储空间。
 	bucket, err := client.Bucket(bucketName)
 	if err != nil {
-		logger.Error(err.Error())
-		return "",err
+		fmt.Println(err.Error())
+		return "", err
 	}
 
 	timenow := time.Now().Unix()
@@ -48,7 +46,6 @@ func PutObjectFromReader(endpoint, accessKeyId, accessKeySecret, bucketName, obj
 
 	return
 }
-
 
 // 上传图片 // base64
 func Base64Upload(file, fileName string) (url string, err error) {
@@ -71,7 +68,7 @@ func Base64Upload(file, fileName string) (url string, err error) {
 	// 链接 oss
 	url, err = PutObjectFromReader(endpoint, accessKeyId, accessKeySecret, bucketName, filename, pic, "taofu-5g/uploads/")
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return "", err
 	}
 	return

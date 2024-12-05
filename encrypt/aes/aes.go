@@ -6,14 +6,13 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 )
 
 // AES ECB PKCS5Padding base64
 func AesECBBase64Encrypt(aesKey, str []byte) (result string, err error) {
 	test, err := AesECBEncrypt(str, aesKey)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return result, err
 	}
 
@@ -26,20 +25,20 @@ func AesECBBase64Encrypt(aesKey, str []byte) (result string, err error) {
 func AesECBBase64Decrypt(aesKey, body string) (plaint []byte, err error) {
 	decodeBytes, err := base64.StdEncoding.DecodeString(body)
 	if err != nil {
-		logger.Error(err)
+		fmt.Println(err)
 		return
 	}
 
 	plaint, err = AesECBDecrypt(decodeBytes, []byte(aesKey))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return
 	}
 
 	return
 }
 
-//加密数据  AES CBC PKCS5Padding base64
+// 加密数据  AES CBC PKCS5Padding base64
 func AesCBCBase64Encrypt(key string, data []byte) (string, error) {
 	encrypted, err := AesCBCEncrypt(data, []byte(key), []byte(key))
 	if err != nil {
@@ -51,17 +50,17 @@ func AesCBCBase64Encrypt(key string, data []byte) (string, error) {
 	return result, nil
 }
 
-//解密数据  AES CBC PKCS5Padding base64
+// 解密数据  AES CBC PKCS5Padding base64
 func AesCBCBase64Decrypt(key string, src string) (data []byte, err error) {
 	decodeBytes, err := base64.StdEncoding.DecodeString(src)
 	if err != nil {
-		logger.Error(err)
+		fmt.Println(err)
 		return
 	}
 
 	data, err = AesCBCDecrypt(decodeBytes, []byte(key), []byte(key))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return data, err
 	}
 
@@ -86,7 +85,7 @@ func PKCS5UnPadding(originData []byte) []byte {
 
 	unpadding := int(originData[length-1])
 	if unpadding > length {
-		logger.Warning(fmt.Sprintf("index out of range, want to use left %d, but length is %d",
+		fmt.Println(fmt.Sprintf("index out of range, want to use left %d, but length is %d",
 			length-unpadding, length))
 		return originData
 	}
@@ -175,7 +174,7 @@ func AesCBCEncrypt(plainText, key, iv []byte) (cipherText []byte, err error) {
 func AesCBCDecrypt(cipherText, key, iv []byte) (plainText []byte, err error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return
 	}
 

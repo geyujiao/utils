@@ -2,7 +2,7 @@ package study
 
 import (
 	"bufio"
-	"github.com/vgmdj/utils/logger"
+	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -26,7 +26,7 @@ func (r *ReadFile) Read(rc chan []byte) {
 	// 打开文件
 	f, err := os.Open(r.Path)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -36,15 +36,15 @@ func (r *ReadFile) Read(rc chan []byte) {
 	for {
 		line, err := rd.ReadBytes('\n')
 		if err == io.EOF {
-			//logger.Info("read to tail... ")
+			//fmt.Println("read to tail... ")
 			time.Sleep(50 * time.Microsecond)
 			continue
 		} else if err != nil {
-			logger.Error("ReadBytes err", err.Error())
+			fmt.Println("ReadBytes err", err.Error())
 			return
 
 		}
-		logger.Info("read byte", string(line[:len(line)-1]))
+		fmt.Println("read byte", string(line[:len(line)-1]))
 		rc <- line[:len(line)-1] //去掉换行符
 
 	}
@@ -57,7 +57,7 @@ type WriteInfluxDB struct {
 func (w *WriteInfluxDB) Write(wc chan string) {
 	//  写入
 	for v := range wc {
-		logger.Info("write data", v)
+		fmt.Println("write data", v)
 	}
 
 }
@@ -71,7 +71,7 @@ type LogProcess struct {
 
 func (l *LogProcess) Process() {
 	// 解析
-	for v := range l.Rc{
+	for v := range l.Rc {
 		// TODO
 		// 用正则表达式解析数据
 		// 将解析后的数据 写入到 chan 中

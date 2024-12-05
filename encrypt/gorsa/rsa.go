@@ -10,7 +10,6 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"github.com/vgmdj/utils/logger"
 	"io/ioutil"
 	"math/big"
 	"os"
@@ -67,7 +66,7 @@ func LoadPrivateKey(filePath string) (priKey *rsa.PrivateKey, err error) {
 	}
 	privateKey, err := ioutil.ReadAll(privateKeyFile)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return nil, err
 	}
 

@@ -1,8 +1,9 @@
 package excel
 
 import (
+	"fmt"
+
 	"github.com/tealeg/xlsx"
-	"github.com/vgmdj/utils/logger"
 )
 
 type RowInfo struct {
@@ -10,12 +11,12 @@ type RowInfo struct {
 	Value2 string
 }
 
-func WriteExcel(fileName string, listData []RowInfo)(err error)  {
+func WriteExcel(fileName string, listData []RowInfo) (err error) {
 	// 新建文件和sheet
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("sheet1")
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	// 写文件
@@ -28,20 +29,19 @@ func WriteExcel(fileName string, listData []RowInfo)(err error)  {
 	}
 	err = file.Save(fileName)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
-	logger.Info("write file success")
+	fmt.Println("write file success")
 	return nil
 }
 
-
-func WriteExcel2(fileName string, list [][]string)(err error)  {
+func WriteExcel2(fileName string, list [][]string) (err error) {
 	// 新建文件和sheet
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("sheet1")
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	// 写文件
@@ -54,9 +54,9 @@ func WriteExcel2(fileName string, list [][]string)(err error)  {
 	}
 	err = file.Save(fileName)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
-	logger.Info("write file success")
+	fmt.Println("write file success")
 	return nil
 }
