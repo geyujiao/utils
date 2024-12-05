@@ -18,3 +18,8 @@
 .idea/modules.xml
 .idea/utils.iml
 .idea/vcs.xml
+SNSPLLua2etc/toEtc/etc.xlsx
+*._test.go
+*.xlsx
+*.txt
+*.json
