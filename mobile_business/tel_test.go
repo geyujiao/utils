@@ -1,9 +1,8 @@
 package library
 
 import (
+	"fmt"
 	"testing"
-
-	"github.com/vgmdj/utils/logger"
 )
 
 func Test_Tel(t *testing.T) {
@@ -25,5 +24,5 @@ func TestTelTmp(t *testing.T) {
 		t.Error(err)
 	}
 
-	logger.Info("data", data)
+	fmt.Println("data", data)
 }

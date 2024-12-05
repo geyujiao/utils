@@ -1,7 +1,7 @@
 package library
 
 import (
-	"github.com/vgmdj/utils/logger"
+	"fmt"
 	"testing"
 )
 
@@ -10,24 +10,24 @@ const (
 	jiemi       = `lvq0/t8Wx84+r1FxcQKqEXVNEiJX5x0E9QVibOwkvH0=`
 )
 
-//加密
+// 加密
 func TestEncrypt(t *testing.T) {
 	encryptD, err := AesCBCBase64Encrypt(aesKey, []byte(baseData3))
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return
 	}
-	logger.Info("encrypt after", encryptD)
+	fmt.Println("encrypt after", encryptD)
 }
 
-//解密
+// 解密
 func TestDecrypt(t *testing.T) {
 	bytes, err := AesCBCBase64Decrypt(aesKey, jiemi)
 	if err != nil {
-		logger.Error(err.Error())
+		fmt.Println(err.Error())
 		return
 	}
-	logger.Info("decrypt after", string(bytes))
+	fmt.Println("decrypt after", string(bytes))
 }
 
 const (

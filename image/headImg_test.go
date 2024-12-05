@@ -1,7 +1,7 @@
 package image
 
 import (
-	"github.com/vgmdj/utils/logger"
+	"fmt"
 	"testing"
 )
 
@@ -20,9 +20,9 @@ func TestDownLoadObject(t *testing.T) {
 	//	"dilireba")
 	//
 	//if err != nil {
-	//	logger.Error(err.Error())
+	//	fmt.Println(err.Error())
 	//} else {
-	//	logger.Info("success")
+	//	fmt.Println("success")
 	//}
 }
 func TestImageUrlToBase64(t *testing.T) {
@@ -34,16 +34,16 @@ func TestCompressImageResourceJpeg(t *testing.T) {
 	//image2 := CompressImageResourceJpeg([]byte(base64Image))
 
 	//if strings.Contains(base64Image, "{"){
-	//	logger.Info("have")
+	//	fmt.Println("have")
 	//	strs := strings.Split(base64Image, "{")
 	//	if len(strs) == 2{
 	//		base64Image = strs[0]
 	//	}
 	//}
-	logger.Info("base64 2---", base64Image)
+	fmt.Println("base64 2---", base64Image)
 	image2 := CompressImageResourcePng([]byte(base64Image))
 
-	logger.Info("image2", string(image2))
+	fmt.Println("image2", string(image2))
 }
 
 func TestBase64Upload(t *testing.T) {

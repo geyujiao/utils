@@ -1,7 +1,7 @@
 package image
 
 import (
-	"github.com/vgmdj/utils/logger"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -19,13 +19,13 @@ func TestGetFileType(t *testing.T) {
 	//f, err := os.Open("cat.png")
 
 	if err != nil {
-		logger.Error("open error: ", err)
+		fmt.Println("open error: ", err)
 	}
 
 	fSrc, err := ioutil.ReadAll(f)
 	if err != nil {
-		logger.Error("open error: ", err)
+		fmt.Println("open error: ", err)
 	}
 
-	logger.Info("file type", GetFileType(fSrc[:10]))
+	fmt.Println("file type", GetFileType(fSrc[:10]))
 }

@@ -1,2 +1,6 @@
-migu5xx/common2-sc.miguvideo.com/SNS/ats/remap.config
-migu5xx/common2-sc.miguvideo.com/CCS/ats/remap.config
+layer-7/sso.zbom.com/SNS/nginx/ssl/zbom.com.crt
+layer-7/sso.zbom.com/SNS/nginx/ssl/zbom.com.key
+layer-7/sso.zbom.com/SNS/nginx/sso.zbom.com.conf
+layer-7/ops.zhibang.com/SNS/nginx/ssl/zhibang.com.key
+layer-7/ops.zhibang.com/SNS/nginx/ssl/zhibang.com.crt
+layer-7/ops.zhibang.com/SNS/nginx/ops.zhibang.com.conf

@@ -4,8 +4,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"testing"
-
-	"github.com/vgmdj/utils/logger"
 )
 
 // 公钥加密私钥解密
@@ -16,13 +14,13 @@ func Test_PubENCTYPTPriDECRYPT(t *testing.T) {
 		t.Error(err)
 	}
 	encodeString := base64.StdEncoding.EncodeToString(pubenctypt)
-	logger.Info("public after", encodeString)
+	fmt.Println("public after", encodeString)
 
 	//encodeString = "QoRbYlWF5TDafVU0VI2RuZskclw1+QHeioFMAKYRud8PbRdTG7ZBTMfkEItsfb/ufw45sqKqYmCpUjxEGsEXnWA/OaaOUTFeExmcOhQPSNHYAQsBNFj7prW5+KvqfdVCTGXV4xEve8LNJXRrfCWy+eeyiSXjxNLZVUrnfHuEQY0="
 	fmt.Println("=================解码====================")
 	decodeBytes, err := base64.StdEncoding.DecodeString(encodeString)
 	pridecrypt, err := PriKeyDECRYPT(decodeBytes, "private.pem")
-	logger.Info(string(pridecrypt))
+	fmt.Println(string(pridecrypt))
 	if err != nil {
 		t.Error(err)
 	}

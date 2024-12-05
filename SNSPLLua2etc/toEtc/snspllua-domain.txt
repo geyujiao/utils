@@ -1,1 +1,2 @@
-common2-sc.miguvideo.com 咪咕视讯9个域名修改4xx5xx缓存策略
+ops.zhibang.com 全站加速7层新增域名
+sso.zbom.com 全站加速7层新增域名
