@@ -1,3 +1,0 @@
-L1/nginx/lua/honor/logmerge_honor.lua:
-L2/nginx/lua/honor/logmerge_honor.lua:
-L2/nginx/lua/originiqiyi/origin_iqiyi_header_filter_l2.lua:

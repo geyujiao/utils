@@ -477,104 +477,104 @@
 -- local atslog2 =  table.concat(atsloglist, "|")
 -- print("atslog2 result==" .. atslog2)
 
-function getlast(list)
-    if not list then
-        return "-"
-    else
-        local i = 0
-        local index = 1
-        while true do
-            i = string.find(list,"[,:] ",i+1)
-            if not i then
-                break
-            end
-            index = i + 2
-        end
-        return string.sub(list,index,#list)
-    end
-end
-local function getUpstreamList(str)
-    local pattern =  "[,:] "  -- "[,:]%s*"
-    local parts = {}
-    if not str then
-        return parts
-    end
-    local from = 1
-    local delim_from, delim_to = string.find(str, pattern, from)
-    while delim_from do
-        table.insert(parts, string.sub(str, from, delim_from - 1))
-        from = delim_to + 1
-        delim_from, delim_to = string.find(str, pattern, from)
-    end
-    table.insert(parts, string.sub(str, from))
-    return parts
-end
+-- function getlast(list)
+--     if not list then
+--         return "-"
+--     else
+--         local i = 0
+--         local index = 1
+--         while true do
+--             i = string.find(list,"[,:] ",i+1)
+--             if not i then
+--                 break
+--             end
+--             index = i + 2
+--         end
+--         return string.sub(list,index,#list)
+--     end
+-- end
+-- local function getUpstreamList(str)
+--     local pattern =  "[,:] "  -- "[,:]%s*"
+--     local parts = {}
+--     if not str then
+--         return parts
+--     end
+--     local from = 1
+--     local delim_from, delim_to = string.find(str, pattern, from)
+--     while delim_from do
+--         table.insert(parts, string.sub(str, from, delim_from - 1))
+--         from = delim_to + 1
+--         delim_from, delim_to = string.find(str, pattern, from)
+--     end
+--     table.insert(parts, string.sub(str, from))
+--     return parts
+-- end
 
-local function gethostFromUpstream(str)
-    if not str then
-        return "-"
-    end
-    if string.find(str, ".",1, true) then
-        -- ipv4
-        local index = string.find(str,":",1, true)
-        if index then
-            str = string.sub(str,0,index - 1)
-            return str
-        end
-    else
-        --ipv6
-        local index = string.find(str,"]",1, true)
-        if index then
-            str = string.sub(str,0,index)
-            return str
-        end
-    end
-    return str
-end
+-- local function gethostFromUpstream(str)
+--     if not str then
+--         return "-"
+--     end
+--     if string.find(str, ".",1, true) then
+--         -- ipv4
+--         local index = string.find(str,":",1, true)
+--         if index then
+--             str = string.sub(str,0,index - 1)
+--             return str
+--         end
+--     else
+--         --ipv6
+--         local index = string.find(str,"]",1, true)
+--         if index then
+--             str = string.sub(str,0,index)
+--             return str
+--         end
+--     end
+--     return str
+-- end
 
-local function getOneAddrStatus(addrlistStr, statuslistStr)
-    local addrParts = getUpstreamList(addrlistStr)
-    local statusParts = getUpstreamList(statuslistStr)
+-- local function getOneAddrStatus(addrlistStr, statuslistStr)
+--     local addrParts = getUpstreamList(addrlistStr)
+--     local statusParts = getUpstreamList(statuslistStr)
 
-    local addr2xx = ""
-    local status2xx = ""
-    local addr3xx = ""
-    local status3xx = ""
-    local addr4xx = ""
-    local status4xx = ""
-    local addr5xx = ""
-    local status5xx = ""
-    -- 4xx,5xx 取最后一个
-    -- 2xx,3xx 取第一个(3xx再3xx，取第一个3xx忽略后面的)
-    for i, part_tmp in ipairs(statusParts) do
-        local part = tonumber(part_tmp) or 0
-        if part >= 500 and part < 600 then
-            addr5xx = addrParts[i] or addrParts[#addrParts]
-            status5xx = part
-        elseif part >= 400 and part < 500  then
-            addr4xx = addrParts[i] or addrParts[#addrParts]
-            status4xx = part
-        elseif part >= 300 and part < 400 and (status3xx == nil or status3xx == "")   then
-            addr3xx = addrParts[i] or addrParts[#addrParts]
-            status3xx = part
-        elseif part >= 200 and part < 300 and (status2xx == nil or status2xx == "") then
-            addr2xx = addrParts[i] or addrParts[#addrParts]
-            status2xx = part
-        end
-    end
-    if status3xx ~= nil and status3xx ~= "" then
-        return addr3xx,status3xx
-    end
-    if status2xx ~= nil and status2xx ~= "" then
-        return addr2xx,status2xx
-    end
-    if status4xx ~= nil and status4xx ~= "" then
-        return addr4xx,status4xx
-    end
-    if status5xx ~= nil and status5xx ~= "" then
-        return addr5xx,status5xx
-    end
-end
+--     local addr2xx = ""
+--     local status2xx = ""
+--     local addr3xx = ""
+--     local status3xx = ""
+--     local addr4xx = ""
+--     local status4xx = ""
+--     local addr5xx = ""
+--     local status5xx = ""
+--     -- 4xx,5xx 取最后一个
+--     -- 2xx,3xx 取第一个(3xx再3xx，取第一个3xx忽略后面的)
+--     for i, part_tmp in ipairs(statusParts) do
+--         local part = tonumber(part_tmp) or 0
+--         if part >= 500 and part < 600 then
+--             addr5xx = addrParts[i] or addrParts[#addrParts]
+--             status5xx = part
+--         elseif part >= 400 and part < 500  then
+--             addr4xx = addrParts[i] or addrParts[#addrParts]
+--             status4xx = part
+--         elseif part >= 300 and part < 400 and (status3xx == nil or status3xx == "")   then
+--             addr3xx = addrParts[i] or addrParts[#addrParts]
+--             status3xx = part
+--         elseif part >= 200 and part < 300 and (status2xx == nil or status2xx == "") then
+--             addr2xx = addrParts[i] or addrParts[#addrParts]
+--             status2xx = part
+--         end
+--     end
+--     if status3xx ~= nil and status3xx ~= "" then
+--         return addr3xx,status3xx
+--     end
+--     if status2xx ~= nil and status2xx ~= "" then
+--         return addr2xx,status2xx
+--     end
+--     if status4xx ~= nil and status4xx ~= "" then
+--         return addr4xx,status4xx
+--     end
+--     if status5xx ~= nil and status5xx ~= "" then
+--         return addr5xx,status5xx
+--     end
+-- end
 
 -- [2001:202:27:7::12]:80 : [2001:202:27:7::12]:443
 -- local upstream_addr = "[2001:202:27:7::12]:80 : [2001:202:27:7::13]:443"
@@ -691,7 +691,7 @@ end
 -- else
 --     print("diff----".. node  .. "||" .. hostnamex)
 -- end
-local need_cache = {"js", "css", "jpg", "jpeg", "png", "gif", "woff"}
+-- local need_cache = {"js", "css", "jpg", "jpeg", "png", "gif", "woff"}
 -- local filename = "example.file.with.many.dots.lua"
 -- local extension = filename:match("^.*%.(.*)$")
 -- print(extension) -- 输出: lua
@@ -781,14 +781,286 @@ local need_cache = {"js", "css", "jpg", "jpeg", "png", "gif", "woff"}
 -- func_limit_ua("update.hihonorcdn.com", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/")
 
 
-local ua = "dasfsMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
--- local res = string.find(ua, "Mozilla/5.0Windows NT 10.0Win64x64AppleWebKit537.36KHTMLlike GeckoChrome",1, true)
-local res = string.match(ua, "^Mozilla/5.0 %(Windows NT 10.0; Win64; x64%) AppleWebKit/537.36 %(KHTML, like Gecko%) Chrome/")
+-- local ua = "dasfsMozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
+-- -- local res = string.find(ua, "Mozilla/5.0Windows NT 10.0Win64x64AppleWebKit537.36KHTMLlike GeckoChrome",1, true)
+-- local res = string.match(ua, "^Mozilla/5.0 %(Windows NT 10.0; Win64; x64%) AppleWebKit/537.36 %(KHTML, like Gecko%) Chrome/")
 
-if res ~= nil then
-    print("fsdfsfs")
+-- if res ~= nil then
+--     print("fsdfsfs")
     
-    return
+--     return
+-- end
+-- print("2222")
+
+-- local t= "A"
+--  local r = string.lower(t1)
+--  print(r)
+
+-- local uriTmp = "/cdn/liveshow/migu/test.jpg"
+-- local limitLocation = "/cdn/liveshow/"
+-- if string.sub(uriTmp, 0, string.len(limitLocation)) == limitLocation then
+--     print("111")
+-- end
+
+-- local geEscapeChar = {
+--     ["^"] = true,
+--     ["$"] = true,
+--     ["("] = true,
+--     [")"] = true,
+--     ["%"] = true,
+--     ["."] = true,
+--     ["["] = true,
+--     ["]"] = true,
+--     ["*"] = true,
+--     ["+"] = true,
+--     ["-"] = true,
+--     ["?"] = true
+-- }
+-- function split(szFullString, szSeparator)
+--     local nFindStartIndex = 1
+--     local nSplitIndex = 1
+--     local nSplitArray = {}
+--     if geEscapeChar[szSeparator] then
+--         szSeparator = "%"..szSeparator
+--     end
+--     while true do
+--        local nFindLastIndex = string.find(szFullString, szSeparator, nFindStartIndex)
+--        if not nFindLastIndex then
+--         nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, string.len(szFullString))
+--         if nSplitArray[nSplitIndex] == "" then
+--             nSplitArray[nSplitIndex] = "-"
+--         end
+--         break
+--        end
+--        nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, nFindLastIndex - 1)
+--        if nSplitArray[nSplitIndex] == "" then
+--           nSplitArray[nSplitIndex] = "-"
+--        end
+--        nFindStartIndex = nFindLastIndex + string.len(szSeparator)
+--        nSplitIndex = nSplitIndex + 1
+--     end
+--     return nSplitArray
+-- end
+
+-- local function strSplit(str, reps)
+--     -- local strlist = {}
+--     -- string.gsub(str]=true,['[^' .. reps .. ']+', function(w) strlist[#strlist + 1] = w end)
+--     -- return strlist
+-- end
+
+-- local function l_f_split(s,delimiter)
+--     local result={}
+--     local newdelimiter = delimiter
+--     if geEscapeChar[delimiter] then
+--         newdelimiter = "%"..delimiter
+--     end
+--     for match in (s..delimiter):gmatch("(.-)"..newdelimiter) do
+--         if match == "" then
+--             match = '-'
+--         end
+--             table.insert(result,match)
+--     end
+--     return result
+-- end
+-- local merge_info = "20241213T040301Z||2409:896d:5c:3255:c8f1:e1a8:7761:9fb2|2409:8087:4:12::12|GET|HTTP/2.0|p96-sign.douyinpic.com|/tos-cn-i-dy/_offtrans__864x540_b467fe94155d422e4870756395a38701_e6416bf8f19bedf12f5c807156f1ff0befabd9a9568d9c91a5eccdc9fbddbb22_vvic~tplv-dy-aweme-images-offline.image?lk3s=138a59ce&x-expires=1735272000&x-signature=ujX%2BtBWuW0vYWYnQpxqCK3%2BvQWg%3D&from=327834062&s=PackSourceEnum_FEED&se=false&sc=origin_cover&biz_tag=aweme_video&l=20241213120209C56E151EFF1B75E49E57|com.ss.android.ugc.aweme/320200 (Linux; U; Android 14; zh_CN; V2244A; Build/UP1A.231005.007; Cronet/TTNetVersion:3578d129 2024-11-05 QuicVersion:d9628e3d 2024-10-11)|NULL|image/vvic|200|TCP_HIT|443|5306|20241213T040301.195Z|20241213T040301.197Z|20241213T040301.197Z|2813084340|HIT|39.136.135.231|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|NULL|83525389|NULL|NULL|1|01|38724|bytedance$https$lk3s=138a59ce&x-expires=1735272000&x-signature=ujX%2BtBWuW0vYWYnQpxqCK3%2BvQWg%3D&se=false&sc=origin_cover&from=327834062&s=PackSourceEnum_FEED&l=20241213120209C56E151EFF1B75E49E57&biz_tag=aweme_video$356$n151-185-201, http/1.1 SD05-CCS-007-CMQD-CMG ( [cHs f ]), https/1.1 BJ02-SNS-002-CMBJ-CMG ( [cHs f ])$4316$NULL$00-be2f27a30d1b2637e50354dde1e90468-be2f27a30d1b263701$NULL$edge_hit$NULL$2409:896d:5c:3255:c8f1:e1a8:7761:9fb2$L1|356|4316|n151-185-201, http/1.1 SD05-CCS-007-CMQD-CMG ( [cHs f ]), https/1.1 BJ02-SNS-002-CMBJ-CMG ( [cHs f ])|NULL|NULL|L1|NULL|14400|9A9ACAAD0296524CD3E4AA8BE16AF2FC|7499|39.136.135.231:8686|0.002|0.003|0.000|0.003|20241213T040301.194Z,-,20241213T040301.194Z,20241213T040301.195Z,-,-,-,-,-,-,-,-,-,-,NULL|-%0.002%0.003%0.000%0.003%67667%7499%26%14400%TLSv1.3%.%5946%NULL%NULL|200|bj02-sns-004-cmbj-cmg"
+
+-- print(merge_info)
+
+-- -- local start_time = os.time()
+-- for i = 1, 10000,1 do
+--     local l_t_merge_1 = strSplit(merge_info or "","|")
+--     local merge_info_new_1 = table.concat(l_t_merge_1, "|")
+-- end
+
+
+-- local startTime = os.clock()
+-- for i = 1, 10000,1 do
+--     local l_t_merge_1 = strSplit(merge_info or "","|")
+--     local merge_info_new_1 = table.concat(l_t_merge_1, "|")
+-- end
+-- -- local end_time = os.time()
+-- -- local elapsed_time = os.difftime(os.clock(), start_time)
+-- -- os.clock(os.clock() -startTime)
+-- print("strSplit---=", (os.clock() -startTime))
+
+-- local startTime3 = os.clock()
+-- for i = 1, 10000,1 do
+--     local l_t_merge_1 = split(merge_info or "","|")
+--     local merge_info_new_1 = table.concat(l_t_merge_1, "|")
+-- end
+-- -- local end_time = os.time()
+-- -- local elapsed_time = os.difftime(os.clock(), start_time)
+-- -- os.clock(os.clock() -startTime)
+-- print("split----=", (os.clock() -startTime3))
+
+
+-- local start_time2 = os.clock()
+-- for j = 1, 10000,1 do
+--     local l_t_merge_1 = l_f_split(merge_info or "","|")
+--     local merge_info_new_1 = table.concat(l_t_merge_1, "|")
+-- end
+-- -- local end_time2 = os.time()
+-- -- local elapsed_time2 = os.difftime(end_time2, start_time2)
+-- print("l_f_split-----=",  os.clock()-start_time2)
+
+
+
+-- local l_t_merge_1 = l_f_split(merge_info or "","|")
+-- local merge_info_new_1 = table.concat(l_t_merge_1, "|")
+-- print("1len===" .. #l_t_merge_1)
+-- -- print(merge_info_new_1)
+-- if merge_info ~= merge_info_new_1 then
+--     print("merge_info ~= merge_info_new_1")
+--     print("merge_info_new_1=".. merge_info_new_1)
+-- end
+--1$$3$$-
+-- merge_info = "1$$3$$" -- "10$NULL$NULL$NULL$0$NULL$1$NULL$NULL$0$0" --"1|2||4|5|||"
+-- local l_t_merge_2 = l_f_split(merge_info or "","$")
+-- -- local merge_info_new_2 = table.concat(l_t_merge_2, "$")
+-- print("2len===="..#l_t_merge_2)
+-- -- print(merge_info_new_2)
+-- print(l_t_merge_2[1])
+-- print(l_t_merge_2[2])
+-- print(l_t_merge_2[3])
+-- print(l_t_merge_2[4])
+-- print(l_t_merge_2[5])
+-- print(merge_info_new_2)
+-- if merge_info ~= merge_info_new_2 then
+--     print("merge_info ~= merge_info_new_2")
+--     print("merge_info_new_2=".. merge_info_new_2)
+-- end
+
+
+-- local request_uri = "bytes|zhang"
+-- print( string.gsub(request_uri,"|","%%7C"))
+
+-- s =  string.gsub(request_uri, "|", function(c) return string.format("%%%02X", string.byte(c)) end)
+
+-- print(s)
+
+-- local uri = "/biz-orange/DA/cdnCache/getCdnCacheData/test.jpg"
+-- local res= string.match(uri,"^/biz(-)orange/DA/cdnCache/getCdnCacheData")
+-- if res ~= nil then
+--     print("testlog---res ~= nil")
+-- end
+-- local code = 200
+-- if code == "200" then
+--     print("111")
+-- end
+
+-- local conf_ua = "cms-agent;cmsrefresh"
+-- local head_ua = "cms-agent" -- "cmsrefresh"
+-- local conf_ua_list = {
+--     ["cms-agent"] = true,
+--     ["cmsrefresh"] = true,
+-- }
+-- -- if string.find(conf_ua, head_ua, 1, true) then
+-- --     print("111")
+-- -- end
+-- -- if conf_ua_list[head_ua] then
+-- --     print("2222")
+-- -- end
+
+
+-- -- local start_time = os.time()
+-- for i = 1, 10000,1 do
+--     if string.find(conf_ua, head_ua, 1, true) then
+--     end
+-- end
+
+
+-- local startTime = os.clock()
+-- for i = 1, 10000,1 do
+--     if string.find(conf_ua, head_ua, 1, true) then
+--         -- print("111")
+--     end
+-- end
+-- print("strSplit---=", (os.clock() -startTime))
+
+-- local startTime3 = os.clock()
+-- for i = 1, 10000,1 do
+--     if conf_ua_list[head_ua] then
+--         -- print("2222")
+--     end
+-- end
+-- print("split----=", (os.clock() -startTime3))
+
+function contains(array, value)
+    for _, v in ipairs(array) do
+        if v == value then
+            return true
+        end
+    end
+    return false
 end
-print("2222")
+
+function stbid(server_name, arg_stbid)
+    local denied_stbid = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '10' }
+    local denied_server_name = {
+    'cache.ott.bestlive.itv.cmvideo.cn',
+    'cache.ott.ystenlive.itv.cmvideo.cn',
+    'cache.ott.wasulive.itv.cmvideo.cn',
+    'cache.ott.hnbblive.itv.cmvideo.cn',
+    'cache.ott.fifalive.itv.cmvideo.cn',
+    "cache.ott.mstgwlive.itv.cmvideo.cn",
+    'zqhswlive.itv.cmvideo.cn',
+    'studentlive.migucloud.com'
+    }
+    if contains(denied_server_name, server_name)  then
+        if contains(denied_stbid, arg_stbid) then
+            print("---403---")
+        end
+    end
+end 
+local mapdenied_stbid = {
+    ['1']= true,
+    ['2']=true,
+    ['3']=true,
+    ['4']=true,
+    ['5']=true,
+    ['6']=true,
+    ['7']=true,
+    ['8']=true,
+    ['9']=true,
+    ['10']=true,
+}
+local mapdenied_server_name = {
+    ['cache.ott.bestlive.itv.cmvideo.cn'] =  true,
+    ['cache.ott.ystenlive.itv.cmvideo.cn'] =  true,
+    ['cache.ott.wasulive.itv.cmvideo.cn'] =  true,
+    ['cache.ott.hnbblive.itv.cmvideo.cn'] =  true,
+    ['cache.ott.fifalive.itv.cmvideo.cn'] =  true,
+    ['cache.ott.mstgwlive.itv.cmvideo.cn'] =  true,
+    ['zqhswlive.itv.cmvideo.cn'] =  true,
+    ['studentlive.migucloud.com'] =  true,
+}
+function Stdidf(server_name, arg_stbid)
+    if mapdenied_server_name[server_name] and mapdenied_stbid[mapdenied_stbid] then
+        print("---403---")
+    end
+    if mapdenied_stbid[server_name] and mapdenied_stbid[arg_stbid]  then
+        ngx.exit(403)
+    else if mapdenied_stbid[server_name] and mapdenied_stbid[arg_stbid]  then
+        ngx.exit(403)
+        end
+    end
+end
+
+local server_name = ""
+local arg_stbid = ""
+
+stbid(server_name, arg_stbid)
+
+
+local startTime1 = os.clock()
+for i = 1, 10000,1 do
+    Stdidf(server_name, arg_stbid)
+end
+print("split--map--=", (os.clock() -startTime1))
+
+local startTime2 = os.clock()
+for i = 1, 10000,1 do
+    stbid(server_name, arg_stbid)
+end
+print("split----=", (os.clock() -startTime2))
 

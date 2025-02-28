@@ -1,2 +1,9 @@
-ops.zhibang.com 全站加速7层新增域名
-sso.zbom.com 全站加速7层新增域名
+/etc/nginx/sites-enabled/sso.zbom.com.conf
+/etc/nginx/sites-enabled/ops.zhibang.com.conf
+/etc/nginx/sites-enabled/learning.zbom.com.conf
+/etc/nginx/sites-enabled/www.zbom.com.conf
+/etc/nginx/sites-enabled/crm.zbom.com.conf
+/etc/nginx/sites-enabled/mall.zbom.com.conf
+/etc/nginx/sites-enabled/price.zbom.com.conf
+/etc/nginx/sites-enabled/crm.zhibang.com.conf
+/etc/nginx/sites-enabled/u.zhibang.com.conf

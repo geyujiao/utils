@@ -5,11 +5,15 @@ import (
 	"time"
 	"utils/router"
 
+	"utils/codenum"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	codenum.GetCodeNum("/Users/geyujiao/external/worknote/project/utils/")
+	return
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{

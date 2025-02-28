@@ -21,6 +21,7 @@ func Register(r *gin.Engine) {
 	r.POST("/api/v1/jsbGetScoreInfo", api.JsbGetScoreInfo)
 	r.POST("/api/v1/getVerifyCode", api.GetVerifyCode)
 	r.OPTIONS("/yunchen", api.YunchenOptions)
-	r.POST("/openapi/httpService/ISSSService", api.GetVerifyCode)
+	r.POST("/openapi/httpService/abc", api.GetVerifyCode)
+	r.POST("/openapi/httpService/#/ISSSService", api.GetVerifyCode)
 
 }
