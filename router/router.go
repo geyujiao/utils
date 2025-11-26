@@ -23,5 +23,13 @@ func Register(r *gin.Engine) {
 	r.OPTIONS("/yunchen", api.YunchenOptions)
 	r.POST("/openapi/httpService/abc", api.GetVerifyCode)
 	r.POST("/openapi/httpService/#/ISSSService", api.GetVerifyCode)
+	r.POST("/hbstatic/posttest", api.GetVerifyCode)
+	r.POST("/hui", api.GetVerifyCode)
+	r.POST("/esop-mobile/api/esop/service/busi/helper/stream", api.GetVerifyCode)
+	r.POST("/cucon", api.GetVerifyCode)
+	r.POST("/zxzlgl", api.GetVerifyCode)
+	r.POST("/smartuat/premiseapi/api/file/upload", api.GetVerifyCode)
+	r.POST("/smartdc/premiseapi/api/file/upload", api.GetVerifyCode)
+	r.GET("/video/tos/cn/tos-cn-v-694b40/oEAiDQEi3A9b3dIgAExVCEAwvtrKdLEBcXZSi/", api.GetVerifyCode)
 
 }

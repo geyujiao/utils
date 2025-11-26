@@ -8,6 +8,24 @@ import (
 	"strings"
 )
 
+
+func Norepetition(fileName string, str []string)  (result []string) {
+	println("origin len: ", len(str))
+	mapList := make(map[string]bool)
+	for _, value := range str {
+		if _, ok := mapList[value]; !ok {
+			mapList[value] = true
+			result = append(result, value)
+		}else{
+			println("duplicate value: ", value)
+		}
+	}
+	println("result len: ", len(result))
+
+	WriteCommonFile(fileName, result)
+	return
+}
+
 func NewRemap() {
 
 	domainList := []string{
@@ -319,4 +337,41 @@ func ReadOriginalData(fileName string) (originalList []string) {
 		originalList = append(originalList, string(data))
 	}
 	return
+}
+
+func WriteCommonFile(filename string, lines []string) (err error) {
+	// 创建/打开文件
+	file, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+	if err != nil {
+		fmt.Println("Error opening file:", err.Error())
+		return err
+	}
+	defer file.Close() // 确保文件在函数结束时关闭
+
+	// 创建一个*Writer，用于按行写入
+	writer := bufio.NewWriter(file)
+
+	// 按行写入数据
+	for _, line := range lines {
+		_, err := writer.WriteString(line + "\n")
+		if err != nil {
+			fmt.Println("Error writing to file:", err)
+			return err
+		}
+	}
+
+	// 确保所有数据都被刷新到文件中
+	err = writer.Flush()
+	if err != nil {
+		fmt.Println("Error flushing writer:", err)
+		return err
+	}
+
+	// fmt.Println("文件写入成功，内容如下：")
+	// // 打印文件内容
+	// newContent, _ := os.ReadFile(filename)
+	// fmt.Print(string(newContent))
+
+	return err
+
 }

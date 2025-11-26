@@ -1,0 +1,61 @@
+    "./other/uat-asset.bomcase.com/CCS/ats/remap.config /湖北衡宽/uat-asset.bomcase.com/L2/etc/trafficserver/"
+    "./other/uat-asset.bomcase.com/CCS/nginx/uat-asset.bomcase.com-l2.conf /湖北衡宽/uat-asset.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/uat-asset.bomcase.com/SNS/ats/parent.config /湖北衡宽/uat-asset.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-asset.bomcase.com/SNS/ats/remap.config /湖北衡宽/uat-asset.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-asset.bomcase.com/SNS/nginx/uat-asset.bomcase.com.conf /湖北衡宽/uat-asset.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/uat-mobile-landing.bomcase.com/CCS/ats/remap.config /湖北衡宽/uat-mobile-landing.bomcase.com/L2/etc/trafficserver/"
+    "./other/uat-mobile-landing.bomcase.com/CCS/nginx/uat-mobile-landing.bomcase.com-l2.conf /湖北衡宽/uat-mobile-landing.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/uat-mobile-landing.bomcase.com/SNS/ats/parent.config /湖北衡宽/uat-mobile-landing.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-mobile-landing.bomcase.com/SNS/ats/remap.config /湖北衡宽/uat-mobile-landing.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-mobile-landing.bomcase.com/SNS/nginx/uat-mobile-landing.bomcase.com.conf /湖北衡宽/uat-mobile-landing.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/uat-shop-console.bomcase.com/CCS/ats/remap.config /湖北衡宽/uat-shop-console.bomcase.com/L2/etc/trafficserver/"
+    "./other/uat-shop-console.bomcase.com/CCS/nginx/uat-shop-console.bomcase.com-l2.conf /湖北衡宽/uat-shop-console.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/uat-shop-console.bomcase.com/SNS/ats/parent.config /湖北衡宽/uat-shop-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-shop-console.bomcase.com/SNS/ats/remap.config /湖北衡宽/uat-shop-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-shop-console.bomcase.com/SNS/nginx/uat-shop-console.bomcase.com.conf /湖北衡宽/uat-shop-console.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/uat-console.bomcase.com/CCS/ats/remap.config /湖北衡宽/uat-console.bomcase.com/L2/etc/trafficserver/"
+    "./other/uat-console.bomcase.com/CCS/nginx/uat-console.bomcase.com-l2.conf /湖北衡宽/uat-console.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/uat-console.bomcase.com/SNS/ats/parent.config /湖北衡宽/uat-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-console.bomcase.com/SNS/ats/remap.config /湖北衡宽/uat-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-console.bomcase.com/SNS/nginx/uat-console.bomcase.com.conf /湖北衡宽/uat-console.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/uat-web.bomcase.com/CCS/ats/remap.config /湖北衡宽/uat-web.bomcase.com/L2/etc/trafficserver/"
+    "./other/uat-web.bomcase.com/CCS/nginx/uat-web.bomcase.com-l2.conf /湖北衡宽/uat-web.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/uat-web.bomcase.com/SNS/ats/parent.config /湖北衡宽/uat-web.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-web.bomcase.com/SNS/ats/remap.config /湖北衡宽/uat-web.bomcase.com/L1/etc/trafficserver/"
+    "./other/uat-web.bomcase.com/SNS/nginx/uat-web.bomcase.com.conf /湖北衡宽/uat-web.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/mobile-landing.bomcase.com/CCS/ats/remap.config /湖北衡宽/mobile-landing.bomcase.com/L2/etc/trafficserver/"
+    "./other/mobile-landing.bomcase.com/CCS/nginx/mobile-landing.bomcase.com-l2.conf /湖北衡宽/mobile-landing.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/mobile-landing.bomcase.com/SNS/ats/parent.config /湖北衡宽/mobile-landing.bomcase.com/L1/etc/trafficserver/"
+    "./other/mobile-landing.bomcase.com/SNS/ats/remap.config /湖北衡宽/mobile-landing.bomcase.com/L1/etc/trafficserver/"
+    "./other/mobile-landing.bomcase.com/SNS/nginx/mobile-landing.bomcase.com.conf /湖北衡宽/mobile-landing.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/shop-console.bomcase.com/CCS/ats/remap.config /湖北衡宽/shop-console.bomcase.com/L2/etc/trafficserver/"
+    "./other/shop-console.bomcase.com/CCS/nginx/shop-console.bomcase.com-l2.conf /湖北衡宽/shop-console.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/shop-console.bomcase.com/SNS/ats/parent.config /湖北衡宽/shop-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/shop-console.bomcase.com/SNS/ats/remap.config /湖北衡宽/shop-console.bomcase.com/L1/etc/trafficserver/"
+    "./other/shop-console.bomcase.com/SNS/nginx/shop-console.bomcase.com.conf /湖北衡宽/shop-console.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/console.bomcase.com/CCS/ats/remap.config /湖北衡宽/console.bomcase.com/L2/etc/trafficserver/"
+    "./other/console.bomcase.com/CCS/nginx/console.bomcase.com-l2.conf /湖北衡宽/console.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/console.bomcase.com/SNS/ats/parent.config /湖北衡宽/console.bomcase.com/L1/etc/trafficserver/"
+    "./other/console.bomcase.com/SNS/ats/remap.config /湖北衡宽/console.bomcase.com/L1/etc/trafficserver/"
+    "./other/console.bomcase.com/SNS/nginx/console.bomcase.com.conf /湖北衡宽/console.bomcase.com/L1/etc/nginx/sites-enabled/"
+    "./other/web.bomcase.com/CCS/ats/remap.config /湖北衡宽/web.bomcase.com/L2/etc/trafficserver/"
+    "./other/web.bomcase.com/CCS/nginx/web.bomcase.com-l2.conf /湖北衡宽/web.bomcase.com/L2/etc/nginx/sites-enabled/"
+    "./other/web.bomcase.com/SNS/ats/parent.config /湖北衡宽/web.bomcase.com/L1/etc/trafficserver/"
+    "./other/web.bomcase.com/SNS/ats/remap.config /湖北衡宽/web.bomcase.com/L1/etc/trafficserver/"
+    "./other/web.bomcase.com/SNS/nginx/web.bomcase.com.conf /湖北衡宽/web.bomcase.com/L1/etc/nginx/sites-enabled/"
+
+
+部分域名需要回源改写，回源host是回源域名
+asset.bomcase.com --- hkxh-lumicase.eos.hubei-3.cmecloud.cn  
+uat-asset.bomcase.com --- hkxh-lumicase.eos.hubei-3.cmecloud.cn
+
+uat-mobile-landing.bomcase.com   ---  uat-web.eos.hubei-3.cmecloud.cn/mobile       
+uat-shop-console.bomcase.com   ---  uat-web.eos.hubei-3.cmecloud.cn/shop-console
+
+uat-console.bomcase.com   ---  uat-web.eos.hubei-3.cmecloud.cn/console    
+uat-web.bomcase.com   --- uat-web.eos.hubei-3.cmecloud.cn/web
+
+mobile-landing.bomcase.com  --- prod-web.eos.hubei-3.cmecloud.cn/mobile                
+shop-console.bomcase.com   --- prod-web.eos.hubei-3.cmecloud.cn/shop-console
+console.bomcase.com    --- prod-web.eos.hubei-3.cmecloud.cn/console 
+web.bomcase.com   --- prod-web.eos.hubei-3.cmecloud.cn/web

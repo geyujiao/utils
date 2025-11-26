@@ -35,19 +35,19 @@ func NewDomain(srcHost, destHost string) {
 
 	// 修改文件名
 	// ModifyFileName(fmt.Sprintf("%s/L2L3/nginx/%s3-l2.conf", destHost, srcHost), fmt.Sprintf("%s/L2L3/nginx/%s3-l2.conf", destHost, destHost))
-	ModifyFileName(fmt.Sprintf("%s/L2/nginx/%s-l2.conf", destHost, srcHost), fmt.Sprintf("%s/L2/nginx/%s-l2.conf", destHost, destHost))
-	ModifyFileName(fmt.Sprintf("%s/L1/nginx/%s.conf", destHost, srcHost), fmt.Sprintf("%s/L1/nginx/%s.conf", destHost, destHost))
+	ModifyFileName(fmt.Sprintf("%s/CCS/nginx/%s-l2.conf", destHost, srcHost), fmt.Sprintf("%s/CCS/nginx/%s-l2.conf", destHost, destHost))
+	ModifyFileName(fmt.Sprintf("%s/SNS/nginx/%s.conf", destHost, srcHost), fmt.Sprintf("%s/SNS/nginx/%s.conf", destHost, destHost))
 	time.Sleep(5 * time.Second)
 
 	fileList := []string{
 		// fmt.Sprintf("%s/ccs/ats/parent.config", destHost),
 		// fmt.Sprintf("%s/L2L3/ats/remap.config", destHost),
 		// fmt.Sprintf("%s/L2L3/nginx/%s3-l2.conf", destHost, destHost),
-		fmt.Sprintf("%s/L2/ats/remap.config", destHost),
-		fmt.Sprintf("%s/L2/nginx/%s-l2.conf", destHost, destHost),
-		fmt.Sprintf("%s/L1/ats/parent.config", destHost),
-		fmt.Sprintf("%s/L1/ats/remap.config", destHost),
-		fmt.Sprintf("%s/L1/nginx/%s.conf", destHost, destHost),
+		fmt.Sprintf("%s/CCS/ats/remap.config", destHost),
+		fmt.Sprintf("%s/CCS/nginx/%s-l2.conf", destHost, destHost),
+		fmt.Sprintf("%s/SNS/ats/parent.config", destHost),
+		fmt.Sprintf("%s/SNS/ats/remap.config", destHost),
+		fmt.Sprintf("%s/SNS/nginx/%s.conf", destHost, destHost),
 	}
 	// 修改文件内容
 	for _, filePath := range fileList {

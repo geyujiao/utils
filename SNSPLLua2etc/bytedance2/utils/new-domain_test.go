@@ -16,12 +16,12 @@ func TestNewDomain(t *testing.T) {
 	// NewDomain(srcHost, destHost)
 	// ModifyFileContent(srcHost, destHost, "v5-gz-b.douyinvod.com.conf")
 
-	srcHost := "v96.douyinvod.com" //"portal.chinayanghe.com"
+	srcHost := "v96-reading-video-bd-a.qznovelvod.com" //"portal.chinayanghe.com"
 	destHostList := []string{
-		"v5-mc-reading-video-a.qznovelvod.com",
-		"v5-mc-reading-video-b.qznovelvod.com",
-		"v5-mc-be-pack.pglstatp-toutiao.com",
-		"v5-mc-reading-video.fqnovelvod.com",
+		"v96-reading-videocdn.qznovelvod.com",
+		// "v5-mc-reading-video-b.qznovelvod.com",
+		// "v5-mc-be-pack.pglstatp-toutiao.com",
+		// "v5-mc-reading-video.fqnovelvod.com",
 		// "v5-e-mc.douyinvod.com",
 		// "v5-f-mc.douyinvod.com",
 		// "v5-g-mc.douyinvod.com",
